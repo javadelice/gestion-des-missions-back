@@ -54,6 +54,14 @@ public class StartupListener {
         col2.setMotDePasse(passwordEncoder.encode("superpass"));
         col2.setRoles(Arrays.asList(new RoleCollegue(col2, Role.ROLE_UTILISATEUR)));
         this.collegueRepo.save(col2);
+        
+        Collegue col3 = new Collegue();
+        col2.setNom("Manager");
+        col2.setPrenom("DEV");
+        col2.setEmail("manager@dev.fr");
+        col2.setMotDePasse(passwordEncoder.encode("superpass"));
+        col2.setRoles(Arrays.asList(new RoleCollegue(col3, Role.ROLE_MANAGER)));
+        this.collegueRepo.save(col3);
     }
 
 }
