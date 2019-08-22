@@ -3,6 +3,7 @@ package dev.security;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -74,13 +75,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint((request, response, authException) -> response.setStatus(HttpServletResponse.SC_FORBIDDEN))
                 .and()
                 // toutes les requêtes doivent être authentifiées
-                .authorizeRequests().anyRequest().authenticated()
+                //.authorizeRequests()//.anyRequest().authenticated()
+         
+                
+                .authorizeRequests()
+                .antMatchers("/h2-console/**").permitAll().anyRequest().authenticated()
+                .and()                
+                .headers().frameOptions().disable()
                 .and()
+                .authorizeRequests()
+                .antMatchers(HttpMethod.GET, "/connexion/*").permitAll()
+                .and()
+                
+                
                 // génération d'un formulaire de login
                 // il faut produire une requête avec les caractéristiques suivantes :
                 //      POST /login
                 //      'Content-Type': 'application/x-www-form-urlencoded'
                 //      Deux paramètres : username et password
+                
                 .formLogin()
                 // en cas de validation avec succès du formulaire
                 // jwtAuthenticationSuccessHandler personnalise la réponse à envoyer
