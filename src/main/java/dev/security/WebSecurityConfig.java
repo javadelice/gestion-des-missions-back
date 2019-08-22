@@ -76,7 +76,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // toutes les requêtes doivent être authentifiées
                 .authorizeRequests()
                 .antMatchers("/h2-console/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/auth").permitAll()
+                //.antMatchers(HttpMethod.POST, "/auth").permitAll()
                 .anyRequest().authenticated()
                 .and().headers().frameOptions().disable()
                 .and()
