@@ -1,7 +1,15 @@
 package dev.domain;
 
-import javax.persistence.*;
 import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Collegue {
@@ -19,7 +27,12 @@ public class Collegue {
     private String motDePasse;
 
     @OneToMany(mappedBy = "collegue", cascade = CascadeType.PERSIST)
+    @JsonIgnore
     private List<RoleCollegue> roles;
+
+    @OneToMany(mappedBy = "collegue")
+    @JsonIgnore
+    private List<Mission> missions;
 
     public Long getId() {
         return id;
@@ -67,5 +80,13 @@ public class Collegue {
 
     public void setPrenom(String prenom) {
         this.prenom = prenom;
+    }
+
+    public List<Mission> getMissions() {
+        return missions;
+    }
+
+    public void setMissions(List<Mission> missions) {
+        this.missions = missions;
     }
 }
