@@ -1,8 +1,12 @@
 package dev.security;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -12,9 +16,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
 
 /**
  * Configuration Spring Security.
@@ -34,8 +35,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         this.jwtAuthenticationSuccessHandler = jwtAuthenticationSuccessHandler;
         this.jwtAuthorizationFilter = jwtAuthorizationFilter;
     }
-
-
 
     // Algorithme de hashage du mot de passe
     @Bean
@@ -66,33 +65,39 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // support de requêtes Cross-Domain pour Spring Security
                 // cette configuration permet d'utiliser les règles CORS de Spring MVC
                 .cors().and()
-                 // Suppression du cookie JSESSIONID
-                 // nous ne souhaitons pas de stockage d'état côté serveur
+                // Suppression du cookie JSESSIONID
+                // nous ne souhaitons pas de stockage d'état côté serveur
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                 // en cas d'erreur, un code 403 est envoyé
-                .exceptionHandling().authenticationEntryPoint((request, response, authException) -> response.setStatus(HttpServletResponse.SC_FORBIDDEN))
+                // en cas d'erreur, un code 403 est envoyé
+                .exceptionHandling()
+                .authenticationEntryPoint((request, response, authException) -> response.setStatus(HttpServletResponse.SC_FORBIDDEN))
                 .and()
                 // toutes les requêtes doivent être authentifiées
-                .authorizeRequests().anyRequest().authenticated()
+                .authorizeRequests()
+                .antMatchers("/h2-console/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/auth").permitAll()
+                .anyRequest().authenticated()
+                .and().headers().frameOptions().disable()
                 .and()
                 // génération d'un formulaire de login
                 // il faut produire une requête avec les caractéristiques suivantes :
-                //      POST /login
-                //      'Content-Type': 'application/x-www-form-urlencoded'
-                //      Deux paramètres : username et password
+                // POST /login
+                // 'Content-Type': 'application/x-www-form-urlencoded'
+                // Deux paramètres : username et password
                 .formLogin()
                 // en cas de validation avec succès du formulaire
                 // jwtAuthenticationSuccessHandler personnalise la réponse à envoyer
-                //     => la génération d'un jeton JWT
-                //     => la pause d'un cookie d'authentification
+                // => la génération d'un jeton JWT
+                // => la pause d'un cookie d'authentification
                 .successHandler(jwtAuthenticationSuccessHandler)
                 // en cas d'echec, code 400 envoyé
                 .failureHandler((request, response, exception) -> response.setStatus(HttpServletResponse.SC_BAD_REQUEST))
                 // la requête POST /login n'est pas soumise à authentification
                 .permitAll()
                 .and()
-                // Filtre permettant de récupérer le jeton JWT et transformer son contenu en utilisateur connecté au sens Spring Security
+                // Filtre permettant de récupérer le jeton JWT et transformer son contenu en
+                // utilisateur connecté au sens Spring Security
                 .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)
                 // Gestion de la déconnexion
                 // /POST /logout

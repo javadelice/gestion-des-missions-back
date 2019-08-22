@@ -10,6 +10,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Nature {
@@ -29,7 +32,7 @@ public class Nature {
 
     private int TJM;
 
-    private int pourcentagePrime;
+    private double pourcentagePrime;
 
     private int plafondFrais;
 
@@ -40,10 +43,25 @@ public class Nature {
 
     private LocalDate finValidite;
 
-    // TODO @OneToMany
-    private List<Nature> listeMissions;
+    @OneToMany(mappedBy = "nature")
+    @JsonIgnore
+    private List<Mission> listeMissions;
 
     public Nature() {
+    }
+
+    public Nature(String code, Choix isFacturee, Choix hasPrime, int tJM, double pourcentagePrime, int plafondFrais, Choix depassPlafond,
+            LocalDate debutValidite, LocalDate finValidite, List<Mission> listeMissions) {
+        this.code = code;
+        this.isFacturee = isFacturee;
+        this.hasPrime = hasPrime;
+        this.TJM = tJM;
+        this.pourcentagePrime = pourcentagePrime;
+        this.plafondFrais = plafondFrais;
+        this.depassPlafond = depassPlafond;
+        this.debutValidite = debutValidite;
+        this.finValidite = finValidite;
+        this.listeMissions = listeMissions;
     }
 
     public Long getId() {
@@ -86,11 +104,11 @@ public class Nature {
         TJM = tJM;
     }
 
-    public int getPourcentagePrime() {
+    public double getPourcentagePrime() {
         return pourcentagePrime;
     }
 
-    public void setPourcentagePrime(int pourcentagePrime) {
+    public void setPourcentagePrime(double pourcentagePrime) {
         this.pourcentagePrime = pourcentagePrime;
     }
 
@@ -126,11 +144,11 @@ public class Nature {
         this.finValidite = finValidite;
     }
 
-    public List<Nature> getListeMissions() {
+    public List<Mission> getListeMissions() {
         return listeMissions;
     }
 
-    public void setListeMissions(List<Nature> listeMissions) {
+    public void setListeMissions(List<Mission> listeMissions) {
         this.listeMissions = listeMissions;
     }
 

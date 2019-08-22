@@ -8,6 +8,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Mission {
@@ -20,7 +22,9 @@ public class Mission {
 
     private LocalDate endDate;
 
-    private Nature nature; // TODO @ManyToOne
+    @ManyToOne
+    @JoinColumn(name = "id_nature")
+    private Nature nature;
 
     private String villeDepart;
 
@@ -34,7 +38,32 @@ public class Mission {
 
     private int prime;
 
+    @ManyToOne
+    @JoinColumn(name = "id_collegue")
+    private Collegue collegue;
+
     public Mission() {
+    }
+
+    public Mission(LocalDate startDate, LocalDate endDate, Nature nature, String villeDepart, String villeArrivee, Transport transport,
+            int prime, Collegue collegue) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.nature = nature;
+        this.villeDepart = villeDepart;
+        this.villeArrivee = villeArrivee;
+        this.transport = transport;
+        this.statut = StatutMission.INITIALE;
+        this.prime = prime;
+        this.collegue = collegue;
+    }
+
+    public Collegue getCollegue() {
+        return collegue;
+    }
+
+    public void setCollegue(Collegue collegue) {
+        this.collegue = collegue;
     }
 
     public Long getId() {
@@ -130,6 +159,8 @@ public class Mission {
         builder.append(statut);
         builder.append(", prime=");
         builder.append(prime);
+        builder.append(", collegue=");
+        builder.append(collegue);
         builder.append("]");
         return builder.toString();
     }
