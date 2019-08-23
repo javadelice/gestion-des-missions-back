@@ -20,6 +20,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -72,9 +73,11 @@ public class JWTAuthenticationSuccessHandler extends SimpleUrlAuthenticationSucc
         String jws = Jwts.builder()
                 .setSubject(user.getUsername())
                 .addClaims(infosSupplementaireToken)
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRES_IN * 1000))
+                .setExpiration(Date.from(ZonedDateTime.now().plusMinutes(5).toInstant()))
+                //.setExpiration(new Date(System.currentTimeMillis() + EXPIRES_IN * 1000))
                 .signWith(io.jsonwebtoken.SignatureAlgorithm.HS512, SECRET)
                 .compact();
+    
 
         Cookie authCookie = new Cookie(TOKEN_COOKIE, (jws));
         authCookie.setHttpOnly(true);
