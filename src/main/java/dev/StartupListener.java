@@ -3,11 +3,28 @@ package dev;
 import java.time.LocalDate;
 import java.util.Arrays;
 
+
+import dev.domain.Collegue;
+import dev.domain.Mission;
+import dev.domain.MissionNature;
+import dev.domain.StatutMission;
+import dev.domain.NdfNature;
+import dev.domain.NoteDeFrais;
+import dev.domain.Role;
+import dev.domain.RoleCollegue;
+import dev.domain.Transport;
+import dev.domain.Version;
+import dev.repository.CollegueRepo;
+import dev.repository.MissionRepo;
+import dev.repository.NoteDeFraisRepo;
+import dev.repository.VersionRepo;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+
 
 import dev.domain.Choix;
 import dev.domain.Collegue;
@@ -23,6 +40,11 @@ import dev.repository.MissionRepo;
 import dev.repository.NatureRepo;
 import dev.repository.VersionRepo;
 
+import java.time.LocalDate;
+import java.time.Month;
+import java.util.Arrays;
+
+
 /**
  * Code de démarrage de l'application. Insertion de jeux de données.
  */
@@ -33,17 +55,26 @@ public class StartupListener {
     private VersionRepo versionRepo;
     private PasswordEncoder passwordEncoder;
     private CollegueRepo collegueRepo;
+
     private NatureRepo natureRepo;
     private MissionRepo missionRepo;
-
+    private NoteDeFraisRepo ndfRepo;
+    
     public StartupListener(@Value("${app.version}") String appVersion, VersionRepo versionRepo, PasswordEncoder passwordEncoder,
             CollegueRepo collegueRepo, NatureRepo natureRepo, MissionRepo missionRepo) {
+
+
+
         this.appVersion = appVersion;
         this.versionRepo = versionRepo;
         this.passwordEncoder = passwordEncoder;
         this.collegueRepo = collegueRepo;
+
         this.natureRepo = natureRepo;
+
         this.missionRepo = missionRepo;
+        this.ndfRepo = ndfRepo;
+
     }
 
     @EventListener(ContextRefreshedEvent.class)
@@ -100,6 +131,25 @@ public class StartupListener {
         m3.setStatut(StatutMission.VALIDEE);
         this.missionRepo.saveAndFlush(m3);
 
+
+        
+        
+        NoteDeFrais noteDeFrais = new NoteDeFrais();
+        noteDeFrais.setCollegue(col1);
+        noteDeFrais.setDate(LocalDate.of(2019, Month.AUGUST, 15));
+        noteDeFrais.setMission(m1);
+        noteDeFrais.setMontant(78.35);
+        noteDeFrais.setNature(NdfNature.TRAIN);
+        this.ndfRepo.save(noteDeFrais);
+        
+        NoteDeFrais noteDeFrais2 = new NoteDeFrais();
+        noteDeFrais2.setCollegue(col1);
+        noteDeFrais2.setDate(LocalDate.of(2018, Month.MAY, 20));
+        noteDeFrais2.setMission(m2);
+        noteDeFrais2.setMontant(25.20);
+        noteDeFrais2.setNature(NdfNature.TRAIN);
+        this.ndfRepo.save(noteDeFrais2);
+        
     }
 
 }
