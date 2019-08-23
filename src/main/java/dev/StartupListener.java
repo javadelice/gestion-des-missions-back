@@ -10,6 +10,7 @@ import dev.domain.MissionNature;
 import dev.domain.StatutMission;
 import dev.domain.NdfNature;
 import dev.domain.NoteDeFrais;
+import dev.domain.NoteDeFraisCumul;
 import dev.domain.Role;
 import dev.domain.RoleCollegue;
 import dev.domain.Transport;
@@ -18,6 +19,7 @@ import dev.repository.CollegueRepo;
 import dev.repository.MissionRepo;
 import dev.repository.NoteDeFraisRepo;
 import dev.repository.VersionRepo;
+import javassist.compiler.ast.NewExpr;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -38,6 +40,7 @@ import dev.domain.Version;
 import dev.repository.CollegueRepo;
 import dev.repository.MissionRepo;
 import dev.repository.NatureRepo;
+import dev.repository.NoteDeFraisCumulRepo;
 import dev.repository.VersionRepo;
 
 import java.time.LocalDate;
@@ -58,10 +61,11 @@ public class StartupListener {
 
     private NatureRepo natureRepo;
     private MissionRepo missionRepo;
+    private NoteDeFraisCumulRepo ndfCumulRepo;
     private NoteDeFraisRepo ndfRepo;
     
     public StartupListener(@Value("${app.version}") String appVersion, VersionRepo versionRepo, PasswordEncoder passwordEncoder,
-            CollegueRepo collegueRepo, NatureRepo natureRepo, MissionRepo missionRepo) {
+            CollegueRepo collegueRepo, NatureRepo natureRepo, MissionRepo missionRepo, NoteDeFraisCumulRepo ndfCumulRepo, NoteDeFraisRepo noteDeFraisRepo) {
 
 
 
@@ -73,7 +77,8 @@ public class StartupListener {
         this.natureRepo = natureRepo;
 
         this.missionRepo = missionRepo;
-        this.ndfRepo = ndfRepo;
+        this.ndfCumulRepo = ndfCumulRepo;
+        this.ndfRepo = noteDeFraisRepo;
 
     }
 
@@ -135,20 +140,31 @@ public class StartupListener {
         
         
         NoteDeFrais noteDeFrais = new NoteDeFrais();
-        noteDeFrais.setCollegue(col1);
         noteDeFrais.setDate(LocalDate.of(2019, Month.AUGUST, 15));
-        noteDeFrais.setMission(m1);
         noteDeFrais.setMontant(78.35);
         noteDeFrais.setNature(NdfNature.TRAIN);
         this.ndfRepo.save(noteDeFrais);
         
+        
         NoteDeFrais noteDeFrais2 = new NoteDeFrais();
-        noteDeFrais2.setCollegue(col1);
         noteDeFrais2.setDate(LocalDate.of(2018, Month.MAY, 20));
-        noteDeFrais2.setMission(m2);
         noteDeFrais2.setMontant(25.20);
         noteDeFrais2.setNature(NdfNature.TRAIN);
         this.ndfRepo.save(noteDeFrais2);
+        
+        NoteDeFraisCumul ndfCumul1 = new NoteDeFraisCumul();
+        ndfCumul1.setMission(m1);
+        ndfCumul1.addNotesDeFrais(noteDeFrais);
+        ndfCumul1.addNotesDeFrais(noteDeFrais2);
+        ndfCumul1.addNotesDeFrais(noteDeFrais);
+        this.ndfCumulRepo.save(ndfCumul1);
+        
+        NoteDeFraisCumul ndfCumul2 = new NoteDeFraisCumul();
+        ndfCumul1.setMission(m2);
+        ndfCumul1.addNotesDeFrais(noteDeFrais2);
+        ndfCumul1.addNotesDeFrais(noteDeFrais);
+        ndfCumul1.addNotesDeFrais(noteDeFrais2);
+        this.ndfCumulRepo.save(ndfCumul2);
         
     }
 

@@ -11,10 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+
 @Entity
 public class NoteDeFrais {
 	 @Id
-	 @GeneratedValue(strategy = GenerationType.AUTO)
+	 @GeneratedValue(strategy = GenerationType.IDENTITY)
 	 private Long id;
 	 
 	 private LocalDate date;
@@ -24,25 +25,13 @@ public class NoteDeFrais {
 	 
 	 private Double montant;
 	 
-	 
 	 @ManyToOne
-	 @JoinColumn(name = "collegue_id")
-	 private Collegue collegue;
+	 @JoinColumn(name = "id_ndfCumul")
+	 private NoteDeFraisCumul ndfCumul;
 	 
-	 @ManyToOne
-	 @JoinColumn(name = "mission_id")
-	 private Mission mission;
-	 
+
 	public NoteDeFrais() {
 		
-	}
-
-	public Collegue getCollegue() {
-		return collegue;
-	}
-
-	public void setCollegue(Collegue collegue) {
-		this.collegue = collegue;
 	}
 
 	public Long getId() {
@@ -76,20 +65,5 @@ public class NoteDeFrais {
 	public void setMontant(Double montant) {
 		this.montant = montant;
 	}
-
-	public Mission getMission() {
-		return mission;
-	}
-
-	public void setMission(Mission mission) {
-		this.mission = mission;
-	}
-	 
-	 
-	 
-	 
-	 
-	 
-	 
 	 
 }
