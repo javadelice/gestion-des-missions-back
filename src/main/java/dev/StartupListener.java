@@ -104,7 +104,8 @@ public class StartupListener {
         Mission m2 = new Mission(LocalDate.now(), LocalDate.now().plusDays(10), n2, "Nantes", "Rennes", Transport.COVOITURAGE, 150, col2);
         this.missionRepo.saveAndFlush(m2);
 
-        Mission m3 = new Mission(LocalDate.now(), LocalDate.now().plusDays(10), n2, "Nantes", "Rennes", Transport.COVOITURAGE, 150, col1);
+        Mission m3 = new Mission(LocalDate.now().plusDays(10), LocalDate.now().plusDays(13), n2, "Nantes", "Rennes", Transport.COVOITURAGE, 150,
+                col1);
         m3.setStatut(StatutMission.VALIDEE);
         this.missionRepo.saveAndFlush(m3);
 

@@ -43,17 +43,18 @@ public class Mission {
     private Collegue collegue;
 
     public Mission() {
+        this.statut = StatutMission.INITIALE;
     }
 
     public Mission(LocalDate startDate, LocalDate endDate, Nature nature, String villeDepart, String villeArrivee, Transport transport,
             int prime, Collegue collegue) {
+        this();
         this.startDate = startDate;
         this.endDate = endDate;
         this.nature = nature;
         this.villeDepart = villeDepart;
         this.villeArrivee = villeArrivee;
         this.transport = transport;
-        this.statut = StatutMission.INITIALE;
         this.prime = prime;
         this.collegue = collegue;
     }
