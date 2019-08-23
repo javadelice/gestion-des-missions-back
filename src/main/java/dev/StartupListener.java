@@ -72,7 +72,7 @@ public class StartupListener {
         n1.setCode("Conseil");
         n1.setIsFacturee(Choix.OUI);
         n1.setHasPrime(Choix.OUI);
-        n1.setTJM(750);
+        n1.setTjm(750);
         n1.setPourcentagePrime(3.5);
         n1.setPlafondFrais(150);
         n1.setDepassPlafond(Choix.OUI);
@@ -83,7 +83,7 @@ public class StartupListener {
         n2.setCode("Expertise technique");
         n2.setIsFacturee(Choix.OUI);
         n2.setHasPrime(Choix.OUI);
-        n2.setTJM(1000);
+        n2.setTjm(1000);
         n2.setPourcentagePrime(4);
         n2.setPlafondFrais(150);
         n2.setDepassPlafond(Choix.OUI);
