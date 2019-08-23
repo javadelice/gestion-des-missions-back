@@ -1,6 +1,7 @@
 package dev.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -30,6 +31,11 @@ public class MissionController {
         return this.missionService.getMissions(id);
     }
 
+    @RequestMapping(method = RequestMethod.GET, path = "/mission")
+    public Optional<Mission> getMission(@RequestParam Long idMission) {
+        return this.missionRepo.findById(idMission);
+    }
+
     @RequestMapping(method = RequestMethod.DELETE, path = "/missions")
     public void deleteMission(@RequestParam Long id) {
         this.missionRepo.deleteById(id);
@@ -37,6 +43,12 @@ public class MissionController {
 
     @RequestMapping(method = RequestMethod.POST, path = "/missions")
     public Mission createMission(@RequestBody Mission mission) {
+        mission.setStatut(StatutMission.INITIALE);
+        return this.missionService.createMission(mission);
+    }
+
+    @RequestMapping(method = RequestMethod.PATCH, path = "/missions")
+    public Mission modifyMission(@RequestBody Mission mission) {
         mission.setStatut(StatutMission.INITIALE);
         return this.missionService.createMission(mission);
     }
