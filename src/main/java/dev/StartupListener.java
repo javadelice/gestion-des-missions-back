@@ -50,7 +50,7 @@ public class StartupListener {
     public void onStart() {
         this.versionRepo.save(new Version(appVersion));
 
-        // Création de deux utilisateurs
+        // Création de trois utilisateurs
 
         Collegue col1 = new Collegue();
         col1.setNom("Admin");
@@ -67,6 +67,14 @@ public class StartupListener {
         col2.setMotDePasse(passwordEncoder.encode("superpass"));
         col2.setRoles(Arrays.asList(new RoleCollegue(col2, Role.ROLE_UTILISATEUR)));
         this.collegueRepo.save(col2);
+        
+        Collegue col3 = new Collegue();
+        col3.setNom("Manager");
+        col3.setPrenom("DEV");
+        col3.setEmail("manager@dev.fr");
+        col3.setMotDePasse(passwordEncoder.encode("superpass"));
+        col3.setRoles(Arrays.asList(new RoleCollegue(col3, Role.ROLE_MANAGER), new RoleCollegue(col3, Role.ROLE_UTILISATEUR)));
+        this.collegueRepo.save(col3);
 
         Nature n1 = new Nature();
         n1.setCode("Conseil");
