@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.domain.Mission;
+import dev.domain.StatutMission;
 import dev.repository.MissionRepo;
 import dev.service.MissionService;
 
@@ -39,6 +40,7 @@ public class MissionController {
 
     @RequestMapping(method = RequestMethod.POST, path = "/missions")
     public Mission createMission(@RequestBody Mission mission) {
+        mission.setStatut(StatutMission.INITIALE);
         return this.missionService.createMission(mission);
     }
 

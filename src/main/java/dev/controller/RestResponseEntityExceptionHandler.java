@@ -12,7 +12,7 @@ public class RestResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = MissionInvalideException.class)
     protected ResponseEntity<Object> handleConflict(MissionInvalideException ex) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Mission invalide !" + ex.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
 
 }
