@@ -1,7 +1,6 @@
 package dev.controller;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -28,9 +27,7 @@ public class MissionController {
 
     @RequestMapping(method = RequestMethod.GET, path = "/missions")
     public List<Mission> getMissions(@RequestParam Long id) {
-        return missionRepo.findAll().stream()
-                .filter(mission -> id == mission.getCollegue().getId())
-                .collect(Collectors.toList());
+        return this.missionService.getMissions(id);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, path = "/missions")

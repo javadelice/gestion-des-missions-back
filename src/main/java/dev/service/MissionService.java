@@ -2,6 +2,8 @@ package dev.service;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,9 +47,26 @@ public class MissionService {
                     "Date de fin de mission invalide (il est interdit de créer une mission qui se termine Samedi ou Dimanche).");
         }
 
-        // TODO création de mission qui chevauche une autre mission interdite
+        List<Mission> listeMissions = getMissions(mission.getCollegue().getId());
+        for (Mission uneMission : listeMissions) {
+            if (mission.getStartDate().isBefore(uneMission.getStartDate()) && mission.getEndDate().isAfter(uneMission.getStartDate().minusDays(1))) {
+                throw new MissionInvalideException("Les dates saisies chevauchent sur une autre mission (mission du " + uneMission.getStartDate()
+                        + " au " + uneMission.getEndDate() + ").");
+            }
+            if (mission.getStartDate().isAfter(uneMission.getStartDate().minusDays(1))
+                    && mission.getStartDate().isBefore(uneMission.getEndDate().plusDays(1))) {
+                throw new MissionInvalideException("Les dates saisies chevauchent sur une autre mission (mission du " + uneMission.getStartDate()
+                        + " au " + uneMission.getEndDate() + ").");
+            }
+        }
 
         return missionRepo.save(mission);
+    }
+
+    public List<Mission> getMissions(Long id) {
+        return missionRepo.findAll().stream()
+                .filter(mission -> id == mission.getCollegue().getId())
+                .collect(Collectors.toList());
     }
 
 }
