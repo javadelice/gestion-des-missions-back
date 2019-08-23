@@ -30,7 +30,7 @@ public class Nature {
     @Enumerated(EnumType.STRING)
     private Choix hasPrime;
 
-    private int TJM;
+    private int tJM;
 
     private double pourcentagePrime;
 
@@ -55,7 +55,7 @@ public class Nature {
         this.code = code;
         this.isFacturee = isFacturee;
         this.hasPrime = hasPrime;
-        this.TJM = tJM;
+        this.tJM = tJM;
         this.pourcentagePrime = pourcentagePrime;
         this.plafondFrais = plafondFrais;
         this.depassPlafond = depassPlafond;
@@ -97,11 +97,11 @@ public class Nature {
     }
 
     public int getTJM() {
-        return TJM;
+        return tJM;
     }
 
     public void setTJM(int tJM) {
-        TJM = tJM;
+        this.tJM = tJM;
     }
 
     public double getPourcentagePrime() {
@@ -163,8 +163,8 @@ public class Nature {
         builder.append(isFacturee);
         builder.append(", hasPrime=");
         builder.append(hasPrime);
-        builder.append(", TJM=");
-        builder.append(TJM);
+        builder.append(", tJM=");
+        builder.append(tJM);
         builder.append(", pourcentagePrime=");
         builder.append(pourcentagePrime);
         builder.append(", plafondFrais=");
