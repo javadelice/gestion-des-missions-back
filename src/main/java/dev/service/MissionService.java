@@ -49,6 +49,9 @@ public class MissionService {
 
         List<Mission> listeMissions = getMissions(mission.getCollegue().getId());
         for (Mission uneMission : listeMissions) {
+            if (uneMission.getId() == mission.getId()) {
+                continue;
+            }
             if (mission.getStartDate().isBefore(uneMission.getStartDate()) && mission.getEndDate().isAfter(uneMission.getStartDate().minusDays(1))) {
                 throw new MissionInvalideException("Les dates saisies chevauchent sur une autre mission (mission du " + uneMission.getStartDate()
                         + " au " + uneMission.getEndDate() + ").");
