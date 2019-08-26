@@ -29,6 +29,10 @@ public class NoteDeFrais {
 	 @JoinColumn(name = "id_ndfCumul")
 	 private NoteDeFraisCumul ndfCumul;
 	 
+	 @ManyToOne
+	 @JoinColumn(name = "collegue")
+	 private Collegue collegue;
+	 
 
 	public NoteDeFrais() {
 		
@@ -64,6 +68,22 @@ public class NoteDeFrais {
 
 	public void setMontant(Double montant) {
 		this.montant = montant;
+	}
+
+	public NoteDeFraisCumul getNdfCumul() {
+		return ndfCumul;
+	}
+
+	public void setNdfCumul(NoteDeFraisCumul ndfCumul) {
+		this.ndfCumul = ndfCumul;
+	}
+
+	public Collegue getCollegue() {
+		return collegue;
+	}
+
+	public void setCollegue(Collegue collegue) {
+		this.collegue = collegue;
 	}
 	 
 }

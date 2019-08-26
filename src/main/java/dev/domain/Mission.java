@@ -172,4 +172,12 @@ public class Mission {
         return builder.toString();
     }
 
+	public NoteDeFraisCumul getNdfCumul() {
+		return ndfCumul;
+	}
+
+	public void setNdfCumul(NoteDeFraisCumul ndfCumul) {
+		this.ndfCumul = ndfCumul;
+	}
+
 }

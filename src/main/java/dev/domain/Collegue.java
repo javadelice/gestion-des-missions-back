@@ -35,6 +35,10 @@ public class Collegue {
     @JsonIgnore
     private List<Mission> missions;
     
+    @OneToMany(mappedBy = "collegue", cascade = CascadeType.PERSIST)
+    @JsonIgnore
+    private List<NoteDeFrais> notesDeFrais;
+    
    
     public Long getId() {
         return id;

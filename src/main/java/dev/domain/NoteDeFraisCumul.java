@@ -57,6 +57,7 @@ public class NoteDeFraisCumul {
 	}
 
 	public void setMission(Mission mission) {
+		mission.setNdfCumul(this); // à améliorer
 		this.mission = mission;
 	}
 	

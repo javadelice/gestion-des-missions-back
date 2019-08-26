@@ -152,6 +152,7 @@ public class StartupListener {
         noteDeFrais.setDate(LocalDate.of(2019, Month.AUGUST, 15));
         noteDeFrais.setMontant(78.35);
         noteDeFrais.setNature(NdfNature.TRAIN);
+        noteDeFrais.setCollegue(col3);
         this.ndfRepo.save(noteDeFrais);
         
         
@@ -159,6 +160,7 @@ public class StartupListener {
         noteDeFrais2.setDate(LocalDate.of(2018, Month.MAY, 20));
         noteDeFrais2.setMontant(25.20);
         noteDeFrais2.setNature(NdfNature.TRAIN);
+        noteDeFrais2.setCollegue(col2);
         this.ndfRepo.save(noteDeFrais2);
         
         NoteDeFraisCumul ndfCumul1 = new NoteDeFraisCumul();
