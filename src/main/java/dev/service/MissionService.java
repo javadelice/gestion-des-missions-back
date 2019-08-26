@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dev.domain.Mission;
+import dev.domain.StatutMission;
 import dev.domain.Transport;
 import dev.exception.MissionInvalideException;
 import dev.repository.MissionRepo;
@@ -70,6 +71,24 @@ public class MissionService {
         return missionRepo.findAll().stream()
                 .filter(mission -> id == mission.getCollegue().getId())
                 .collect(Collectors.toList());
+    }
+
+    public List<Mission> getMissionsAValider() {
+        return this.missionRepo.findAll().stream()
+                .filter(mission -> mission.getStatut().equals(StatutMission.EN_ATTENTE_VALIDATION))
+                .collect(Collectors.toList());
+    }
+
+    public Mission validerMission(boolean isValidated, Mission mission) {
+        if (isValidated == true) {
+            mission.setStatut(StatutMission.VALIDEE);
+        }
+
+        if (isValidated == false) {
+            mission.setStatut(StatutMission.REJETEE);
+        }
+
+        return this.missionRepo.save(mission);
     }
 
 }

@@ -67,7 +67,7 @@ public class StartupListener {
         col2.setMotDePasse(passwordEncoder.encode("superpass"));
         col2.setRoles(Arrays.asList(new RoleCollegue(col2, Role.ROLE_UTILISATEUR)));
         this.collegueRepo.save(col2);
-        
+
         Collegue col3 = new Collegue();
         col3.setNom("Manager");
         col3.setPrenom("DEV");
@@ -108,6 +108,16 @@ public class StartupListener {
                 col1);
         m3.setStatut(StatutMission.VALIDEE);
         this.missionRepo.saveAndFlush(m3);
+
+        Mission m4 = new Mission(LocalDate.now().plusDays(14), LocalDate.now().plusDays(18), n1, "Nantes", "Bordeaux", Transport.TRAIN, 150,
+                col1);
+        m4.setStatut(StatutMission.EN_ATTENTE_VALIDATION);
+        this.missionRepo.saveAndFlush(m4);
+
+        Mission m5 = new Mission(LocalDate.now().plusDays(14), LocalDate.now().plusDays(18), n1, "Nantes", "Lille", Transport.VOITURE_DE_SERVICE, 150,
+                col2);
+        m5.setStatut(StatutMission.EN_ATTENTE_VALIDATION);
+        this.missionRepo.saveAndFlush(m5);
 
     }
 

@@ -53,4 +53,14 @@ public class MissionController {
         return this.missionService.createMission(mission);
     }
 
+    @RequestMapping(method = RequestMethod.GET, path = "/valider")
+    public List<Mission> getMissionsAValider() {
+        return this.missionService.getMissionsAValider();
+    }
+
+    @RequestMapping(method = RequestMethod.PATCH, path = "/valider")
+    public Mission validerMission(@RequestParam boolean isValidated, @RequestBody Mission mission) {
+        return this.missionService.validerMission(isValidated, mission);
+    }
+
 }
