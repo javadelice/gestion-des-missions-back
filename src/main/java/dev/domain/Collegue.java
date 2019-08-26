@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,6 +35,9 @@ public class Collegue {
     @OneToMany(mappedBy = "collegue")
     @JsonIgnore
     private List<Mission> missions;
+
+    @Enumerated(EnumType.STRING)
+    private Departement departement;
 
     public Long getId() {
         return id;
@@ -89,4 +94,13 @@ public class Collegue {
     public void setMissions(List<Mission> missions) {
         this.missions = missions;
     }
+
+    public Departement getDepartement() {
+        return departement;
+    }
+
+    public void setDepartement(Departement departement) {
+        this.departement = departement;
+    }
+
 }

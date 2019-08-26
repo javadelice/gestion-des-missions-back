@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import dev.domain.Choix;
 import dev.domain.Collegue;
+import dev.domain.Departement;
 import dev.domain.Mission;
 import dev.domain.Nature;
 import dev.domain.Role;
@@ -58,6 +59,7 @@ public class StartupListener {
         col1.setEmail("admin@dev.fr");
         col1.setMotDePasse(passwordEncoder.encode("superpass"));
         col1.setRoles(Arrays.asList(new RoleCollegue(col1, Role.ROLE_ADMINISTRATEUR), new RoleCollegue(col1, Role.ROLE_UTILISATEUR)));
+        col1.setDepartement(Departement.D1);
         this.collegueRepo.save(col1);
 
         Collegue col2 = new Collegue();
@@ -66,6 +68,7 @@ public class StartupListener {
         col2.setEmail("user@dev.fr");
         col2.setMotDePasse(passwordEncoder.encode("superpass"));
         col2.setRoles(Arrays.asList(new RoleCollegue(col2, Role.ROLE_UTILISATEUR)));
+        col2.setDepartement(Departement.D2);
         this.collegueRepo.save(col2);
 
         Collegue col3 = new Collegue();
@@ -74,6 +77,7 @@ public class StartupListener {
         col3.setEmail("manager@dev.fr");
         col3.setMotDePasse(passwordEncoder.encode("superpass"));
         col3.setRoles(Arrays.asList(new RoleCollegue(col3, Role.ROLE_MANAGER), new RoleCollegue(col3, Role.ROLE_UTILISATEUR)));
+        col3.setDepartement(Departement.D2);
         this.collegueRepo.save(col3);
 
         Nature n1 = new Nature();
@@ -118,6 +122,16 @@ public class StartupListener {
                 col2);
         m5.setStatut(StatutMission.EN_ATTENTE_VALIDATION);
         this.missionRepo.saveAndFlush(m5);
+
+        Mission m6 = new Mission(LocalDate.now().plusDays(20), LocalDate.now().plusDays(21), n1, "Nantes", "Vannes", Transport.AVION, 150,
+                col2);
+        m6.setStatut(StatutMission.EN_ATTENTE_VALIDATION);
+        this.missionRepo.saveAndFlush(m6);
+
+        Mission m7 = new Mission(LocalDate.now().plusDays(14), LocalDate.now().plusDays(18), n1, "Nantes", "Lille", Transport.TRAIN, 150,
+                col3);
+        m7.setStatut(StatutMission.EN_ATTENTE_VALIDATION);
+        this.missionRepo.saveAndFlush(m7);
 
     }
 

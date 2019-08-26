@@ -12,6 +12,7 @@ import dev.domain.Mission;
 import dev.domain.StatutMission;
 import dev.domain.Transport;
 import dev.exception.MissionInvalideException;
+import dev.repository.CollegueRepo;
 import dev.repository.MissionRepo;
 
 @Service
@@ -19,6 +20,9 @@ public class MissionService {
 
     @Autowired
     private MissionRepo missionRepo;
+
+    @Autowired
+    private CollegueRepo collegueRepo;
 
     public MissionService() {
 
@@ -73,9 +77,11 @@ public class MissionService {
                 .collect(Collectors.toList());
     }
 
-    public List<Mission> getMissionsAValider() {
+    public List<Mission> getMissionsAValider(Long idManager) {
         return this.missionRepo.findAll().stream()
+                .filter(mission -> mission.getCollegue().getDepartement().equals(this.collegueRepo.findById(idManager).get().getDepartement()))
                 .filter(mission -> mission.getStatut().equals(StatutMission.EN_ATTENTE_VALIDATION))
+                .filter(mission -> mission.getCollegue().getId() != idManager)
                 .collect(Collectors.toList());
     }
 
