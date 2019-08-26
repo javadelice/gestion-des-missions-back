@@ -22,6 +22,7 @@ import dev.domain.Mission;
 import dev.domain.NoteDeFrais;
 import dev.repository.CollegueRepo;
 import dev.repository.NoteDeFraisRepo;
+import dev.service.NoteDeFraisCumulService;
 import dev.service.NoteDeFraisService;
 
 @RestController
@@ -33,9 +34,21 @@ public class NoteDeFraisController {
 	
 	@Autowired 
 	private NoteDeFraisService ndfService;
+	
+	@Autowired 
+	private NoteDeFraisCumulService ndfCumulService;
 
 	public NoteDeFraisController(NoteDeFraisRepo ndfRepo) {
         this.ndfRepo=ndfRepo;
+    }
+	
+	
+    
+	@RequestMapping(method = RequestMethod.GET, path= "/{id}")
+    public List<NoteDeFrais> getNotesDeFraisFromId (@PathVariable Long id){
+
+    	return ndfService.findByNdfCumulId(id);
+   
     }
 	
 	/** La méthode getNoteDeFrais
@@ -43,19 +56,13 @@ public class NoteDeFraisController {
 	 *  en relation avec la mission donnée en paramètre
 	 * 
 	 */
-    
-	@RequestMapping(method = RequestMethod.GET, params= "{Id}")
-    public Optional<NoteDeFrais> getNoteDeFraisFromId (@RequestParam Long Id){
-
-    	return ndfService.findById(Id);
-   
-    }
 	
-    @RequestMapping(method = RequestMethod.GET, params= "mission")
-    public Optional<NoteDeFrais> getNoteDeFraisFromMission (@RequestParam Mission mission){
+    @RequestMapping(method = RequestMethod.GET)//, params = "mission")
+    public List<NoteDeFrais> getNotesDeFraisFromMission (@RequestParam Long mission){
 
-    	return ndfService.findById(mission.getId());
+    	//return ndfService.findByNdfCumulId(ndfCumulService.findByMission(id).get().getId());
    
+    	return ndfService.findByNdfCumulId(ndfCumulService.findByMission(mission).getId());
     }
     
     /** La méthode creerNdf

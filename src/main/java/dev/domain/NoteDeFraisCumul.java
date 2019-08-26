@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class NoteDeFraisCumul {
 
@@ -19,10 +21,12 @@ public class NoteDeFraisCumul {
 	private Long id;
 	
 	@OneToMany(mappedBy = "ndfCumul")
+	@JsonIgnore
 	private List<NoteDeFrais> notesDeFrais;
 	
 	@OneToOne
 	@JoinColumn(name = "mission_id")
+	@JsonIgnore
 	 private Mission mission;
 
 	

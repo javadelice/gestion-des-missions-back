@@ -11,26 +11,32 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class NoteDeFrais {
 	 @Id
 	 @GeneratedValue(strategy = GenerationType.IDENTITY)
+	 @JsonIgnore
 	 private Long id;
 	 
 	 private LocalDate date;
 	 
 	 @Enumerated(EnumType.STRING)
+	 @JsonIgnore
 	 private NdfNature nature;
 	 
 	 private Double montant;
 	 
 	 @ManyToOne
 	 @JoinColumn(name = "id_ndfCumul")
+	 @JsonIgnore
 	 private NoteDeFraisCumul ndfCumul;
 	 
 	 @ManyToOne
 	 @JoinColumn(name = "collegue")
+	 @JsonIgnore
 	 private Collegue collegue;
 	 
 	public NoteDeFrais() {

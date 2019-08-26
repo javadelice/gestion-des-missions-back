@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Mission {
 
@@ -42,10 +44,12 @@ public class Mission {
 
     @ManyToOne
     @JoinColumn(name = "id_collegue")
+    @JsonIgnore
     private Collegue collegue;
     
     @OneToOne
 	@JoinColumn(name = "id_noteDeFraisCumul")
+    @JsonIgnore
 	 private NoteDeFraisCumul ndfCumul;
 
     public Mission() {
