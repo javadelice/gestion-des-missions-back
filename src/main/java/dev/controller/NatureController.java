@@ -19,6 +19,8 @@ public class NatureController {
 	@Autowired
     private NatureRepo natureRepo;
 
+	//Accès à la page "nature" qu'à ceux ayant le rôle d'administrateur 
+	//@Secured("ROLE_ADMINISTRATEUR")
     @RequestMapping(method = RequestMethod.GET, path = "/nature")
     public List<Nature> getNature(@RequestParam Long id) {
         return natureRepo.findAll();

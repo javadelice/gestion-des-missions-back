@@ -77,6 +77,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/h2-console/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/auth").permitAll()
+                //Accès à la page nature autorisé qu'à ceux ayant le rôle d'administrateur
+                //.antMatchers(HttpMethod.GET, "/nature").hasRole("ADMINISTRATEUR")
                 .anyRequest().authenticated()
                 .and().headers().frameOptions().disable()
                 .and()
