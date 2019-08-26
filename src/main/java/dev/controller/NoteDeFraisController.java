@@ -44,8 +44,15 @@ public class NoteDeFraisController {
 	 * 
 	 */
     
+	@RequestMapping(method = RequestMethod.GET, params= "{Id}")
+    public Optional<NoteDeFrais> getNoteDeFraisFromId (@RequestParam Long Id){
+
+    	return ndfService.findById(Id);
+   
+    }
+	
     @RequestMapping(method = RequestMethod.GET, params= "mission")
-    public Optional<NoteDeFrais> getNoteDeFrais (@RequestParam Mission mission){
+    public Optional<NoteDeFrais> getNoteDeFraisFromMission (@RequestParam Mission mission){
 
     	return ndfService.findById(mission.getId());
    

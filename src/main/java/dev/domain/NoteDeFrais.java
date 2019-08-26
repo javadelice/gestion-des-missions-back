@@ -33,12 +33,10 @@ public class NoteDeFrais {
 	 @JoinColumn(name = "collegue")
 	 private Collegue collegue;
 	 
-
 	public NoteDeFrais() {
 		
 	}
 	
-
 	public NoteDeFrais(LocalDate date, Double montant, NdfNature nature, NoteDeFraisCumul ndfCumul,
 			Collegue collegue) {
 		super();
