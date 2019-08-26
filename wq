@@ -1,0 +1,64 @@
+*   [31mcc95690[m -[33m (HEAD -> Notes-de-frais-creation3)[m Merge branch 'ndf-creation' into Notes-de-frais-creation3 [32m(33 minutes ago) [1;34m<Jean-Baptiste Tâm MATHIEU>[m
+[31m|[m[32m\[m  
+[31m|[m *   [31m70984ec[m -[33m (ndf-creation)[m Merge branch 'Notes-de-frais-creation2' into ndf-creation [32m(3 days ago) [1;34m<Jean-Baptiste Tâm MATHIEU>[m
+[31m|[m [33m|[m[34m\[m  
+* [33m|[m [34m\[m   [31m5275081[m -[33m[m Merge branch 'Notes-de-frais-creation2' into Notes-de-frais-creation3 [32m(47 minutes ago) [1;34m<Jean-Baptiste Tâm MATHIEU>[m
+[35m|[m[36m\[m [33m\[m [34m\[m  
+[35m|[m * [33m|[m [34m|[m [31m255415f[m -[33m (Notes-de-frais-creation2)[m refactoring [32m(48 minutes ago) [1;34m<Jean-Baptiste Tâm MATHIEU>[m
+[35m|[m [34m|[m [33m|[m[34m/[m  
+[35m|[m [34m|[m[34m/[m[33m|[m   
+[35m|[m * [33m|[m [31md857dc5[m -[33m (origin/Notes-de-frais-creation2)[m Notes-de-fraisCumul + Entry [32m(3 days ago) [1;34m<Jean-Baptiste Tâm MATHIEU>[m
+* [36m|[m [33m|[m   [31m0fd5f67[m -[33m (origin/master, origin/HEAD, master)[m Merge pull request #4 from javadelice/issue-9-modif-mission [32m(13 hours ago) [1;34m<jbtm>[m
+[33m|[m[1;32m\[m [36m\[m [33m\[m  
+[33m|[m [1;32m|[m[33m_[m[36m|[m[33m/[m  
+[33m|[m[33m/[m[1;32m|[m [36m|[m   
+[33m|[m * [36m|[m [31m9d20838[m -[33m (origin/issue-9-modif-mission)[m issue-9 : modification mission ok [32m(3 days ago) [1;34m<Alexei AYINDE>[m
+[33m|[m[33m/[m [36m/[m  
+* [36m|[m   [31m3da27ad[m -[33m[m Merge pull request #3 from javadelice/issue-8-demande-mission [32m(3 days ago) [1;34m<jbtm>[m
+[1;33m|[m[1;34m\[m [36m\[m  
+[1;33m|[m * [36m|[m [31mae93c2c[m -[33m (origin/issue-8-demande-mission)[m issue-8 : ajout règles de validité chevauchement missions [32m(3 days ago) [1;34m<Alexei AYINDE>[m
+[1;33m|[m * [36m|[m [31mc980fdd[m -[33m[m issue-8 : création mission ok [32m(3 days ago) [1;34m<Alexei AYINDE>[m
+[1;33m|[m * [36m|[m [31m5ab6ee2[m -[33m[m fonctionnalité demande mission [32m(4 days ago) [1;34m<Alexei AYINDE>[m
+* [1;34m|[m [36m|[m   [31m94f2b48[m -[33m[m Merge pull request #2 from javadelice/menu_admin [32m(3 days ago) [1;34m<alexeiayinde>[m
+[1;34m|[m[1;36m\[m [1;34m\[m [36m\[m  
+[1;34m|[m [1;36m|[m[1;34m/[m [36m/[m  
+[1;34m|[m[1;34m/[m[1;36m|[m [36m|[m   
+[1;34m|[m * [36m|[m   [31m5cbc4e5[m -[33m (origin/menu_admin, menu_admin)[m Merge branch 'master' into menu_admin [32m(4 days ago) [1;34m<ClementBr>[m
+[1;34m|[m [31m|[m[1;34m\[m [36m\[m  
+[1;34m|[m [31m|[m[1;34m/[m [36m/[m  
+[1;34m|[m[1;34m/[m[31m|[m [36m|[m   
+[1;34m|[m * [36m|[m [31m17a7583[m -[33m[m modif CollegueManager [32m(4 days ago) [1;34m<Clement BRIEUC>[m
+[1;34m|[m * [36m|[m [31m6f56be2[m -[33m[m 1er commit: ajout role manager [32m(5 days ago) [1;34m<Clement BRIEUC>[m
+[1;34m|[m [32m|[m [36m|[m * [31m459a66d[m -[33m (origin/nature_mission_creer)[m affichage contenu tableau 80% [32m(3 days ago) [1;34m<Clement BRIEUC>[m
+[1;34m|[m [32m|[m [36m|[m * [31mc6b411a[m -[33m[m affichage contenu tableau incomplet [32m(3 days ago) [1;34m<Clement BRIEUC>[m
+[1;34m|[m [32m|[m[1;34m_[m[36m|[m[1;34m/[m  
+[1;34m|[m[1;34m/[m[32m|[m [36m|[m   
+[1;34m|[m [32m|[m [36m|[m *   [31mc4e6df5[m -[33m (refs/stash)[m WIP on Notes-de-frais-creation2: c87022e refactoring premerge [32m(3 days ago) [1;34m<Jean-Baptiste Tâm MATHIEU>[m
+[1;34m|[m [32m|[m [36m|[m [36m|[m[35m\[m  
+[1;34m|[m [32m|[m [36m|[m[36m/[m [35m/[m  
+[1;34m|[m [32m|[m [36m|[m * [31ma95cf58[m -[33m[m index on Notes-de-frais-creation2: c87022e refactoring premerge [32m(3 days ago) [1;34m<Jean-Baptiste Tâm MATHIEU>[m
+[1;34m|[m [32m|[m [36m|[m[36m/[m  
+[1;34m|[m [32m|[m *   [31mc87022e[m -[33m[m refactoring premerge [32m(3 days ago) [1;34m<Jean-Baptiste Tâm MATHIEU>[m
+[1;34m|[m [32m|[m [1;34m|[m[1;31m\[m  
+[1;34m|[m [32m|[m[1;34m/[m [1;31m/[m  
+[1;34m|[m[1;34m/[m[32m|[m [1;31m|[m   
+[1;34m|[m [32m|[m [1;31m|[m *   [31m146cbaf[m -[33m (Notes-de-frais-creation)[m Class creation + refactoring [32m(3 days ago) [1;34m<Jean-Baptiste Tâm MATHIEU>[m
+[1;34m|[m [32m|[m [1;31m|[m [1;34m|[m[1;31m\[m  
+[1;34m|[m [32m|[m[1;34m_[m[1;31m|[m[1;34m/[m [1;31m/[m  
+[1;34m|[m[1;34m/[m[32m|[m [1;31m|[m [1;31m/[m   
+[1;34m|[m [32m|[m [1;31m|[m[1;31m/[m    
+[1;34m|[m [32m|[m [1;31m|[m *   [31m062c383[m -[33m (origin/Note-de-frais)[m refactoring premerge [32m(3 days ago) [1;34m<Jean-Baptiste Tâm MATHIEU>[m
+[1;34m|[m [32m|[m [1;31m|[m [1;34m|[m[1;31m\[m  
+[1;34m|[m [32m|[m[1;34m_[m[1;31m|[m[1;34m/[m [1;31m/[m  
+[1;34m|[m[1;34m/[m[32m|[m [1;31m|[m [1;31m/[m   
+[1;34m|[m [32m|[m [1;31m|[m[1;31m/[m    
+[1;34m|[m [32m|[m * [31m113407a[m -[33m (origin/Notes-de-frais, Notes-de-frais)[m Notes de frais - visu + dépendances [32m(4 days ago) [1;34m<Jean-Baptiste Tâm MATHIEU>[m
+[1;34m|[m [32m|[m[32m/[m  
+* [32m|[m   [31mee0ef2d[m -[33m[m Merge pull request #1 from javadelice/issue-7-missions-visualisation [32m(4 days ago) [1;34m<alexeiayinde>[m
+[32m|[m[31m\[m [32m\[m  
+[32m|[m [31m|[m[32m/[m  
+[32m|[m[32m/[m[31m|[m   
+[32m|[m * [31m051f334[m -[33m (origin/issue-7-missions-visualisation)[m issue-7 - Finalisation WEB API pour composant missions-visualisation [32m(4 days ago) [1;34m<Alexei AYINDE>[m
+[32m|[m * [31m173a038[m -[33m[m Ajout entités mission et nature [32m(5 days ago) [1;34m<Alexei AYINDE>[m
+[32m|[m[32m/[m  
+* [31ma916442[m -[33m[m init archetype [32m(7 days ago) [1;34m<Travis CI User>[m

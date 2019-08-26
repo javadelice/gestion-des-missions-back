@@ -162,17 +162,17 @@ public class StartupListener {
         this.ndfRepo.save(noteDeFrais2);
         
         NoteDeFraisCumul ndfCumul1 = new NoteDeFraisCumul();
-        ndfCumul1.setMission(m1);
+        ndfCumul1.setMission(m3);
         ndfCumul1.addNotesDeFrais(noteDeFrais);
         ndfCumul1.addNotesDeFrais(noteDeFrais2);
         ndfCumul1.addNotesDeFrais(noteDeFrais);
         this.ndfCumulRepo.save(ndfCumul1);
         
         NoteDeFraisCumul ndfCumul2 = new NoteDeFraisCumul();
-        ndfCumul1.setMission(m2);
-        ndfCumul1.addNotesDeFrais(noteDeFrais2);
-        ndfCumul1.addNotesDeFrais(noteDeFrais);
-        ndfCumul1.addNotesDeFrais(noteDeFrais2);
+        ndfCumul2.setMission(m1);
+        ndfCumul2.addNotesDeFrais(noteDeFrais2);
+        ndfCumul2.addNotesDeFrais(noteDeFrais);
+        ndfCumul2.addNotesDeFrais(noteDeFrais2);
         this.ndfCumulRepo.save(ndfCumul2);
         
     }
