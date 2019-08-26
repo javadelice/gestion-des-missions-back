@@ -177,6 +177,12 @@ public class StartupListener {
         ndfCumul2.addNotesDeFrais(noteDeFrais2);
         this.ndfCumulRepo.save(ndfCumul2);
         
+        //à améliorer
+        noteDeFrais.setNdfCumul(ndfCumul2);
+        noteDeFrais2.setNdfCumul(ndfCumul1);
+        m3.setNdfCumul(ndfCumul1);
+        m1.setNdfCumul(ndfCumul2);
+        
     }
 
 }
