@@ -24,6 +24,16 @@ public class NatureController {
     @RequestMapping(method = RequestMethod.GET, path = "/nature")
     public List<Nature> getNature(@RequestParam Long id) {
         return natureRepo.findAll();
+
+    /*
+    @Autowired
+    private NatureRepo natureRepo;
+
+    @RequestMapping(method = RequestMethod.GET, path = "/natures")
+    public List<Nature> getNatures() {
+        return this.natureRepo.findAll();
+    */
+      
     }
 
 }
