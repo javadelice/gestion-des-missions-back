@@ -1,10 +1,16 @@
 package dev.security;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import dev.controller.vm.CollegueVM;
-import dev.domain.Collegue;
-import dev.repository.CollegueRepo;
-import io.jsonwebtoken.Jwts;
+import java.io.IOException;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +21,12 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.stream.Collectors;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import dev.controller.vm.CollegueVM;
+import dev.domain.Collegue;
+import dev.repository.CollegueRepo;
+import io.jsonwebtoken.Jwts;
 
 /**
  * Gestion de la réponse HTTP en cas d'authentification à succès.
@@ -48,11 +51,10 @@ public class JWTAuthenticationSuccessHandler extends SimpleUrlAuthenticationSucc
     @Autowired
     private ObjectMapper mapper;
 
-
     @Override
     @Transactional
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-                                        Authentication authentication) throws IOException, ServletException {
+            Authentication authentication) throws IOException, ServletException {
 
         LOG.info("Génération du token JWT");
 
@@ -60,7 +62,8 @@ public class JWTAuthenticationSuccessHandler extends SimpleUrlAuthenticationSucc
 
         String rolesList = user.getAuthorities().stream().map(a -> a.getAuthority()).collect(Collectors.joining(","));
 
-        Collegue collegue = collegueRepo.findByEmail(user.getUsername()).orElseThrow(() -> new IllegalArgumentException("L'email ne correspond à aucun collegue"));
+        Collegue collegue = collegueRepo.findByEmail(user.getUsername())
+                .orElseThrow(() -> new IllegalArgumentException("L'email ne correspond à aucun collegue"));
 
         response.setContentType("application/json");
         response.getWriter().write(mapper.writeValueAsString(new CollegueVM(collegue)));

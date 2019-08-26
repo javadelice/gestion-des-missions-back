@@ -27,9 +27,9 @@ public class MissionController {
     @Autowired
     private MissionService missionService;
 
-    @Secured("ROLE_UTILISATEUR")
     @RequestMapping(method = RequestMethod.GET, path = "/missions")
     public List<Mission> getMissions(@RequestParam Long id) {
+
         return this.missionService.getMissions(id);
     }
 
@@ -55,7 +55,7 @@ public class MissionController {
         return this.missionService.createMission(mission);
     }
 
-    @Secured("ROLE_MANAGER")
+    @Secured({ "ROLE_MANAGER" })
     @RequestMapping(method = RequestMethod.GET, path = "/valider")
     public List<Mission> getMissionsAValider(@RequestParam Long idManager) {
         return this.missionService.getMissionsAValider(idManager);
