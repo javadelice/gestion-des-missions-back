@@ -30,7 +30,21 @@ public class NoteDeFraisCumul {
 	public NoteDeFraisCumul() {
 		super();
 		this.notesDeFrais = new ArrayList<NoteDeFrais>();
+		
 	}
+
+	
+	
+	
+	public NoteDeFraisCumul(List<NoteDeFrais> notesDeFrais, Mission mission) {
+		super();
+
+		this.notesDeFrais = notesDeFrais;
+		this.mission = mission;
+	}
+
+
+
 
 	public Long getId() {
 		return id;

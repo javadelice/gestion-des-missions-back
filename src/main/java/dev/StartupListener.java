@@ -151,7 +151,7 @@ public class StartupListener {
         NoteDeFrais noteDeFrais = new NoteDeFrais();
         noteDeFrais.setDate(LocalDate.of(2019, Month.AUGUST, 15));
         noteDeFrais.setMontant(78.35);
-        noteDeFrais.setNature(NdfNature.TRAIN);
+        noteDeFrais.setNature(NdfNature.AVION);
         noteDeFrais.setCollegue(col3);
         this.ndfRepo.save(noteDeFrais);
         
@@ -163,25 +163,40 @@ public class StartupListener {
         noteDeFrais2.setCollegue(col2);
         this.ndfRepo.save(noteDeFrais2);
         
+        
+        
         NoteDeFraisCumul ndfCumul1 = new NoteDeFraisCumul();
         ndfCumul1.setMission(m3);
         ndfCumul1.addNotesDeFrais(noteDeFrais);
-        ndfCumul1.addNotesDeFrais(noteDeFrais2);
-        ndfCumul1.addNotesDeFrais(noteDeFrais);
+
         this.ndfCumulRepo.save(ndfCumul1);
         
         NoteDeFraisCumul ndfCumul2 = new NoteDeFraisCumul();
         ndfCumul2.setMission(m1);
         ndfCumul2.addNotesDeFrais(noteDeFrais2);
-        ndfCumul2.addNotesDeFrais(noteDeFrais);
-        ndfCumul2.addNotesDeFrais(noteDeFrais2);
         this.ndfCumulRepo.save(ndfCumul2);
         
         //à améliorer
+
         noteDeFrais.setNdfCumul(ndfCumul2);
+        this.ndfRepo.save(noteDeFrais);
         noteDeFrais2.setNdfCumul(ndfCumul1);
+        this.ndfRepo.save(noteDeFrais2);
         m3.setNdfCumul(ndfCumul1);
+        this.missionRepo.save(m3);
         m1.setNdfCumul(ndfCumul2);
+        this.missionRepo.save(m1);
+        
+        NoteDeFrais noteDeFrais3= new NoteDeFrais(LocalDate.of(2018, Month.MARCH, 20), 25.20 ,NdfNature.HOTEL, ndfCumul2, col2);
+        this.ndfRepo.save(noteDeFrais3);
+
+        NoteDeFrais noteDeFrais4= new NoteDeFrais(LocalDate.of(2018, Month.JUNE, 25), 34.51 ,NdfNature.CARBURANT, ndfCumul1, col3);
+        this.ndfRepo.save(noteDeFrais4);
+        
+        NoteDeFrais noteDeFrais5= new NoteDeFrais(LocalDate.of(2018, Month.APRIL, 11), 34.51 ,NdfNature.CARBURANT, ndfCumul1, col3);
+        this.ndfRepo.save(noteDeFrais5);
+        
+
         
     }
 

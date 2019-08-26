@@ -37,6 +37,19 @@ public class NoteDeFrais {
 	public NoteDeFrais() {
 		
 	}
+	
+
+	public NoteDeFrais(LocalDate date, Double montant, NdfNature nature, NoteDeFraisCumul ndfCumul,
+			Collegue collegue) {
+		super();
+
+		this.date = date;
+		this.nature = nature;
+		this.montant = montant;
+		this.ndfCumul = ndfCumul;
+		this.collegue = collegue;
+	}
+
 
 	public Long getId() {
 		return id;

@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -37,7 +38,12 @@ public class Collegue {
     
     @OneToMany(mappedBy = "collegue", cascade = CascadeType.PERSIST)
     @JsonIgnore
-    private List<NoteDeFrais> notesDeFrais;
+    private List<NoteDeFrais> notesDeFrais; 
+    
+    /*
+    @OneToMany(cascade=CascadeType.ALL)
+    @JoinTable(name="collegue_notesdefrais_mapping",joinColumns=@JoinColumn(name="collegue_id"),inverseJoinColumns=@JoinColumn(name="notedefrais_id"))
+    private List<NoteDeFrais> notesDeFrais; */
     
    
     public Long getId() {
@@ -95,4 +101,17 @@ public class Collegue {
     public void setMissions(List<Mission> missions) {
         this.missions = missions;
     }
+
+	public List<NoteDeFrais> getNotesDeFrais() {
+		return notesDeFrais;
+	}
+
+	public void setNotesDeFrais(List<NoteDeFrais> notesDeFrais) {
+		this.notesDeFrais = notesDeFrais;
+	}
+    
+	public void addNotesDeFrais(NoteDeFrais noteDeFrais){
+		this.notesDeFrais.add(noteDeFrais);
+	}
+    
 }
