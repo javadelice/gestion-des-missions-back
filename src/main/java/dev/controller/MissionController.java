@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +29,7 @@ public class MissionController {
 
     @RequestMapping(method = RequestMethod.GET, path = "/missions")
     public List<Mission> getMissions(@RequestParam Long id) {
+
         return this.missionService.getMissions(id);
     }
 
@@ -51,6 +53,18 @@ public class MissionController {
     public Mission modifyMission(@RequestBody Mission mission) {
         mission.setStatut(StatutMission.INITIALE);
         return this.missionService.createMission(mission);
+    }
+
+    @Secured({ "ROLE_MANAGER" })
+    @RequestMapping(method = RequestMethod.GET, path = "/valider")
+    public List<Mission> getMissionsAValider(@RequestParam Long idManager) {
+        return this.missionService.getMissionsAValider(idManager);
+    }
+
+    @Secured("ROLE_MANAGER")
+    @RequestMapping(method = RequestMethod.PATCH, path = "/valider")
+    public Mission validerMission(@RequestParam boolean isValidated, @RequestBody Mission mission) {
+        return this.missionService.validerMission(isValidated, mission);
     }
 
 }
