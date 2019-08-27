@@ -22,7 +22,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  * Configuration Spring Security.
  */
 @Configuration
-@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -78,12 +77,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 // toutes les requêtes doivent être authentifiées
 
-                //.authorizeRequests()//.anyRequest().authenticated()
-         
-                
+                // .authorizeRequests()//.anyRequest().authenticated()
+
                 .authorizeRequests()
                 .antMatchers("/h2-console/**").permitAll().anyRequest().authenticated()
-                .and()                
+                .and()
                 .headers().frameOptions().disable()
 
                 .and()
@@ -92,12 +90,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/h2-console/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/connexion").permitAll()
                 .antMatchers(HttpMethod.GET, "/connexion/*").permitAll()
-                //Accès à la page nature autorisé qu'à ceux ayant le rôle d'administrateur
+                // Accès à la page nature autorisé qu'à ceux ayant le rôle d'administrateur
                 .anyRequest().authenticated()
                 .and().headers().frameOptions().disable()
                 .and()
-                
-                
+
                 // génération d'un formulaire de login
                 // il faut produire une requête avec les caractéristiques suivantes :
 
@@ -105,9 +102,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // 'Content-Type': 'application/x-www-form-urlencoded'
                 // Deux paramètres : username et password
 
-                //      POST /login
-                //      'Content-Type': 'application/x-www-form-urlencoded'
-                //      Deux paramètres : username et password
+                // POST /login
+                // 'Content-Type': 'application/x-www-form-urlencoded'
+                // Deux paramètres : username et password
 
                 .formLogin()
                 // en cas de validation avec succès du formulaire
