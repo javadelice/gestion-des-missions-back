@@ -8,8 +8,10 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Mission {
@@ -41,6 +43,10 @@ public class Mission {
     @ManyToOne
     @JoinColumn(name = "id_collegue")
     private Collegue collegue;
+    
+    @OneToOne
+	@JoinColumn(name = "id_noteDeFraisCumul")
+	 private NoteDeFraisCumul ndfCumul;
 
     public Mission() {
         this.statut = StatutMission.INITIALE;
@@ -165,5 +171,13 @@ public class Mission {
         builder.append("]");
         return builder.toString();
     }
+
+	public NoteDeFraisCumul getNdfCumul() {
+		return ndfCumul;
+	}
+
+	public void setNdfCumul(NoteDeFraisCumul ndfCumul) {
+		this.ndfCumul = ndfCumul;
+	}
 
 }
