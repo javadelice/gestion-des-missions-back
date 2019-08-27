@@ -30,7 +30,7 @@ public class Nature {
     @Enumerated(EnumType.STRING)
     private Choix hasPrime;
 
-    private int TJM;
+    private int tjm;
 
     private double pourcentagePrime;
 
@@ -50,12 +50,12 @@ public class Nature {
     public Nature() {
     }
 
-    public Nature(String code, Choix isFacturee, Choix hasPrime, int tJM, double pourcentagePrime, int plafondFrais, Choix depassPlafond,
+    public Nature(String code, Choix isFacturee, Choix hasPrime, int tjm, double pourcentagePrime, int plafondFrais, Choix depassPlafond,
             LocalDate debutValidite, LocalDate finValidite, List<Mission> listeMissions) {
         this.code = code;
         this.isFacturee = isFacturee;
         this.hasPrime = hasPrime;
-        this.TJM = tJM;
+        this.tjm = tjm;
         this.pourcentagePrime = pourcentagePrime;
         this.plafondFrais = plafondFrais;
         this.depassPlafond = depassPlafond;
@@ -96,12 +96,12 @@ public class Nature {
         this.hasPrime = hasPrime;
     }
 
-    public int getTJM() {
-        return TJM;
+    public int getTjm() {
+        return tjm;
     }
 
-    public void setTJM(int tJM) {
-        TJM = tJM;
+    public void setTjm(int tjm) {
+        this.tjm = tjm;
     }
 
     public double getPourcentagePrime() {
@@ -163,8 +163,8 @@ public class Nature {
         builder.append(isFacturee);
         builder.append(", hasPrime=");
         builder.append(hasPrime);
-        builder.append(", TJM=");
-        builder.append(TJM);
+        builder.append(", tjm=");
+        builder.append(tjm);
         builder.append(", pourcentagePrime=");
         builder.append(pourcentagePrime);
         builder.append(", plafondFrais=");
@@ -181,4 +181,6 @@ public class Nature {
         return builder.toString();
     }
 
+    
+    
 }

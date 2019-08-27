@@ -24,6 +24,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(securedEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Value("${jwt.cookie}")
@@ -87,7 +88,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .authorizeRequests()
+
+                .antMatchers("/h2-console/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/connexion").permitAll()
                 .antMatchers(HttpMethod.GET, "/connexion/*").permitAll()
+                //Accès à la page nature autorisé qu'à ceux ayant le rôle d'administrateur
+                .anyRequest().authenticated()
+                .and().headers().frameOptions().disable()
                 .and()
                 
                 
