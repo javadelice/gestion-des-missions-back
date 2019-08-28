@@ -18,13 +18,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class NoteDeFrais {
 	 @Id
 	 @GeneratedValue(strategy = GenerationType.IDENTITY)
-	 @JsonIgnore
 	 private Long id;
 	 
 	 private LocalDate date;
 	 
 	 @Enumerated(EnumType.STRING)
-	 @JsonIgnore
 	 private NdfNature nature;
 	 
 	 private Double montant;
@@ -34,10 +32,7 @@ public class NoteDeFrais {
 	 @JsonIgnore
 	 private NoteDeFraisCumul ndfCumul;
 	 
-	 @ManyToOne
-	 @JoinColumn(name = "collegue")
-	 @JsonIgnore
-	 private Collegue collegue;
+	 
 	 
 	public NoteDeFrais() {
 		
@@ -51,7 +46,6 @@ public class NoteDeFrais {
 		this.nature = nature;
 		this.montant = montant;
 		this.ndfCumul = ndfCumul;
-		this.collegue = collegue;
 	}
 
 
@@ -95,12 +89,5 @@ public class NoteDeFrais {
 		this.ndfCumul = ndfCumul;
 	}
 
-	public Collegue getCollegue() {
-		return collegue;
-	}
-
-	public void setCollegue(Collegue collegue) {
-		this.collegue = collegue;
-	}
 	 
 }

@@ -24,6 +24,7 @@ public class Collegue {
 
     private String email;
 
+    @JsonIgnore
     private String motDePasse;
 
     @OneToMany(mappedBy = "collegue", cascade = CascadeType.PERSIST)
@@ -34,9 +35,7 @@ public class Collegue {
     @JsonIgnore
     private List<Mission> missions;
     
-    @OneToMany(mappedBy = "collegue", cascade = CascadeType.PERSIST)
-    @JsonIgnore
-    private List<NoteDeFrais> notesDeFrais; 
+ 
     
     /*
     @OneToMany(cascade=CascadeType.ALL)
@@ -100,16 +99,6 @@ public class Collegue {
         this.missions = missions;
     }
 
-	public List<NoteDeFrais> getNotesDeFrais() {
-		return notesDeFrais;
-	}
 
-	public void setNotesDeFrais(List<NoteDeFrais> notesDeFrais) {
-		this.notesDeFrais = notesDeFrais;
-	}
-    
-	public void addNotesDeFrais(NoteDeFrais noteDeFrais){
-		this.notesDeFrais.add(noteDeFrais);
-	}
     
 }

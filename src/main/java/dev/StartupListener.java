@@ -104,6 +104,14 @@ public class StartupListener {
         col2.setRoles(Arrays.asList(new RoleCollegue(col2, Role.ROLE_UTILISATEUR)));
         this.collegueRepo.save(col2);
         
+        Collegue col4 = new Collegue();
+        col2.setNom("User2");
+        col2.setPrenom("DEV");
+        col2.setEmail("user2@dev.fr");
+        col2.setMotDePasse(passwordEncoder.encode("superpass"));
+        col2.setRoles(Arrays.asList(new RoleCollegue(col2, Role.ROLE_UTILISATEUR)));
+        this.collegueRepo.save(col2);
+        
         Collegue col3 = new Collegue();
         col3.setNom("Manager");
         col3.setPrenom("DEV");
@@ -152,7 +160,7 @@ public class StartupListener {
         noteDeFrais.setDate(LocalDate.of(2019, Month.AUGUST, 15));
         noteDeFrais.setMontant(78.35);
         noteDeFrais.setNature(NdfNature.AVION);
-        noteDeFrais.setCollegue(col3);
+
         this.ndfRepo.save(noteDeFrais);
         
         
@@ -160,7 +168,6 @@ public class StartupListener {
         noteDeFrais2.setDate(LocalDate.of(2018, Month.MAY, 20));
         noteDeFrais2.setMontant(25.20);
         noteDeFrais2.setNature(NdfNature.TRAIN);
-        noteDeFrais2.setCollegue(col2);
         this.ndfRepo.save(noteDeFrais2);
         
         

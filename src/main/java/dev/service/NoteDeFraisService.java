@@ -61,11 +61,12 @@ public class NoteDeFraisService {
 //
 //		}
 //	}
-
+/*
 	public Optional<NoteDeFrais[]> findByCollegue(Collegue col) {
 
 		return null;// NoteDeFraisRepo.fin(Id);
 
 	}
-
+*/
+	
 }
