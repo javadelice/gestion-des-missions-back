@@ -29,7 +29,6 @@ public class NoteDeFrais {
 	 
 	 @ManyToOne
 	 @JoinColumn(name = "id_ndfCumul")
-	 @JsonIgnore
 	 private NoteDeFraisCumul ndfCumul;
 	 
 	 
