@@ -11,92 +11,88 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-
 @Entity
 public class NoteDeFrais {
-	 @Id
-	 @GeneratedValue(strategy = GenerationType.IDENTITY)
-	 private Long id;
-	 
-	 private LocalDate date;
-	 
-	 @Enumerated(EnumType.STRING)
-	 private NdfNature nature;
-	 
-	 private Double montant;
-	 
-	 @ManyToOne
-	 @JoinColumn(name = "id_ndfCumul")
-	 private NoteDeFraisCumul ndfCumul;
-	 
-	 @ManyToOne
-	 @JoinColumn(name = "collegue")
-	 private Collegue collegue;
-	 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	public NoteDeFrais() {
-		
-	}
-	
+    private LocalDate date;
 
-	public NoteDeFrais(LocalDate date, Double montant, NdfNature nature, NoteDeFraisCumul ndfCumul,
-			Collegue collegue) {
-		super();
+    @Enumerated(EnumType.STRING)
+    private NdfNature nature;
 
-		this.date = date;
-		this.nature = nature;
-		this.montant = montant;
-		this.ndfCumul = ndfCumul;
-		this.collegue = collegue;
-	}
+    private Double montant;
 
+    @ManyToOne
+    @JoinColumn(name = "id_ndfCumul")
+    private NoteDeFraisCumul ndfCumul;
 
-	public Long getId() {
-		return id;
-	}
+//	 @ManyToOne
+//	 @JoinColumn(name = "collegue")
+//	 private Collegue collegue;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public NoteDeFrais() {
 
-	public LocalDate getDate() {
-		return date;
-	}
+    }
 
-	public void setDate(LocalDate date) {
-		this.date = date;
-	}
+    public NoteDeFrais(LocalDate date, Double montant, NdfNature nature, NoteDeFraisCumul ndfCumul,
+            Collegue collegue) {
+        super();
 
-	public NdfNature getNature() {
-		return nature;
-	}
+        this.date = date;
+        this.nature = nature;
+        this.montant = montant;
+        this.ndfCumul = ndfCumul;
+//        this.collegue = collegue;
+    }
 
-	public void setNature(NdfNature nature) {
-		this.nature = nature;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public Double getMontant() {
-		return montant;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setMontant(Double montant) {
-		this.montant = montant;
-	}
+    public LocalDate getDate() {
+        return date;
+    }
 
-	public NoteDeFraisCumul getNdfCumul() {
-		return ndfCumul;
-	}
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
 
-	public void setNdfCumul(NoteDeFraisCumul ndfCumul) {
-		this.ndfCumul = ndfCumul;
-	}
+    public NdfNature getNature() {
+        return nature;
+    }
 
-	public Collegue getCollegue() {
-		return collegue;
-	}
+    public void setNature(NdfNature nature) {
+        this.nature = nature;
+    }
 
-	public void setCollegue(Collegue collegue) {
-		this.collegue = collegue;
-	}
-	 
+    public Double getMontant() {
+        return montant;
+    }
+
+    public void setMontant(Double montant) {
+        this.montant = montant;
+    }
+
+    public NoteDeFraisCumul getNdfCumul() {
+        return ndfCumul;
+    }
+
+    public void setNdfCumul(NoteDeFraisCumul ndfCumul) {
+        this.ndfCumul = ndfCumul;
+    }
+
+//    public Collegue getCollegue() {
+//        return collegue;
+//    }
+//
+//    public void setCollegue(Collegue collegue) {
+//        this.collegue = collegue;
+//    }
+
 }
