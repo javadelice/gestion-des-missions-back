@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,6 +37,9 @@ public class Collegue {
     @OneToMany(mappedBy = "collegue")
     @JsonIgnore
     private List<Mission> missions;
+
+    @Enumerated(EnumType.STRING)
+    private Departement departement;
     
     @OneToMany(mappedBy = "collegue", cascade = CascadeType.PERSIST)
     @JsonIgnore
@@ -44,8 +49,7 @@ public class Collegue {
     @OneToMany(cascade=CascadeType.ALL)
     @JoinTable(name="collegue_notesdefrais_mapping",joinColumns=@JoinColumn(name="collegue_id"),inverseJoinColumns=@JoinColumn(name="notedefrais_id"))
     private List<NoteDeFrais> notesDeFrais; */
-    
-   
+
     public Long getId() {
         return id;
     }
@@ -100,6 +104,14 @@ public class Collegue {
 
     public void setMissions(List<Mission> missions) {
         this.missions = missions;
+    }
+
+    public Departement getDepartement() {
+        return departement;
+    }
+
+    public void setDepartement(Departement departement) {
+        this.departement = departement;
     }
 
 	public List<NoteDeFrais> getNotesDeFrais() {
