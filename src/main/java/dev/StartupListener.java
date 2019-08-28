@@ -110,7 +110,7 @@ public class StartupListener {
         Collegue col3 = new Collegue();
         col3.setNom("Manager");
         col3.setPrenom("DEV");
-        col3.setEmail("manager@dev.fr");
+        col3.setEmail("manager.dev.gdm@gmail.com");
         col3.setMotDePasse(passwordEncoder.encode("superpass"));
         col3.setRoles(Arrays.asList(new RoleCollegue(col3, Role.ROLE_MANAGER), new RoleCollegue(col3, Role.ROLE_UTILISATEUR)));
         col3.setDepartement(Departement.D2);
@@ -168,6 +168,11 @@ public class StartupListener {
                 col3);
         m7.setStatut(StatutMission.EN_ATTENTE_VALIDATION);
         this.missionRepo.saveAndFlush(m7);
+
+        Mission m8 = new Mission(LocalDate.now().minusDays(14), LocalDate.now().minusDays(12), n1, "Nantes", "Lille", Transport.TRAIN, 0,
+                col3);
+        m8.setStatut(StatutMission.VALIDEE);
+        this.missionRepo.saveAndFlush(m8);
 
         NoteDeFrais noteDeFrais = new NoteDeFrais();
         noteDeFrais.setDate(LocalDate.of(2019, Month.AUGUST, 15));

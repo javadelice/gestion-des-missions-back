@@ -3,6 +3,7 @@ package dev.controller;
 import java.util.List;
 import java.util.Optional;
 
+import dev.service.TraitementDeNuitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -26,6 +27,9 @@ public class MissionController {
 
     @Autowired
     private MissionService missionService;
+
+    @Autowired
+    private TraitementDeNuitService traitementDeNuitService;
 
     @RequestMapping(method = RequestMethod.GET, path = "/missions")
     public List<Mission> getMissions(@RequestParam Long id) {
@@ -67,4 +71,9 @@ public class MissionController {
         return this.missionService.validerMission(isValidated, mission);
     }
 
+    @Secured("ROLE_MANAGER")
+    @RequestMapping(method = RequestMethod.GET, path = "/update")
+    public void forcerTraitementNuit() {
+        traitementDeNuitService.traitementDeNuit();
+    }
 }

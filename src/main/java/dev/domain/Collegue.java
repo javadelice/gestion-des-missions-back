@@ -1,17 +1,9 @@
 package dev.domain;
 
 import java.util.List;
+import java.util.Objects;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -30,7 +22,7 @@ public class Collegue {
 
     private String motDePasse;
 
-    @OneToMany(mappedBy = "collegue", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "collegue", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JsonIgnore
     private List<RoleCollegue> roles;
 
@@ -125,5 +117,22 @@ public class Collegue {
 	public void addNotesDeFrais(NoteDeFrais noteDeFrais){
 		this.notesDeFrais.add(noteDeFrais);
 	}
-    
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Collegue collegue = (Collegue) o;
+        return id.equals(collegue.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return this.email;
+    }
 }
