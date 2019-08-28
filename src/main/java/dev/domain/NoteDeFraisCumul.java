@@ -32,7 +32,6 @@ public class NoteDeFraisCumul {
     public NoteDeFraisCumul() {
         super();
         this.notesDeFrais = new ArrayList<NoteDeFrais>();
-
     }
 
     public NoteDeFraisCumul(List<NoteDeFrais> notesDeFrais, Mission mission) {

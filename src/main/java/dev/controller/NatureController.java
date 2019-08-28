@@ -30,7 +30,6 @@ public class NatureController {
     @RequestMapping(method = RequestMethod.GET, path = "/natures")
     public List<Nature> getNatures() {
         return this.natureRepo.findAll();
-
     }
 
 }

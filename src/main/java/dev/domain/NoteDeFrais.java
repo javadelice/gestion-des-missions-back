@@ -87,12 +87,12 @@ public class NoteDeFrais {
         this.ndfCumul = ndfCumul;
     }
 
-//    public Collegue getCollegue() {
-//        return collegue;
-//    }
+//	public Collegue getCollegue() {
+//		return collegue;
+//	}
 //
-//    public void setCollegue(Collegue collegue) {
-//        this.collegue = collegue;
-//    }
+//	public void setCollegue(Collegue collegue) {
+//		this.collegue = collegue;
+//	}
 
 }
