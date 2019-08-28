@@ -73,7 +73,7 @@ public class JWTAuthenticationSuccessHandler extends SimpleUrlAuthenticationSucc
         String jws = Jwts.builder()
                 .setSubject(user.getUsername())
                 .addClaims(infosSupplementaireToken)
-                .setExpiration(Date.from(ZonedDateTime.now().plusMinutes(5).toInstant()))
+                .setExpiration(Date.from(ZonedDateTime.now().plusMinutes(45).toInstant()))
                 //.setExpiration(new Date(System.currentTimeMillis() + EXPIRES_IN * 1000))
                 .signWith(io.jsonwebtoken.SignatureAlgorithm.HS512, SECRET)
                 .compact();
