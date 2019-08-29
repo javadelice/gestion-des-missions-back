@@ -22,10 +22,7 @@ public class NatureService {
     }
     
     public Nature createNature(Nature nature) {
-        if (nature.getFinValidite().isBefore(LocalDate.now())) {
-            throw new NatureInvalideException("La date de fin de validité ne peut pas être antérieur à celle du début de validité.");
-        }
-        
+    	
         if (nature.getPourcentagePrime() > 10 || nature.getPourcentagePrime() < 0) {
         	throw new NatureInvalideException("Valeur de pourcentage invalide (le pourcentage doit être inférieur à 10).");
         }
@@ -47,8 +44,6 @@ public class NatureService {
 		return natureRepo.save(nature);
 }
     public List<Nature> getNature() {
-        return natureRepo.findAll().stream()
-                .filter(nature -> LocalDate.now().isBefore(nature.getFinValidite()))
-                .collect(Collectors.toList());
+        return natureRepo.findAll();
     }
 }
