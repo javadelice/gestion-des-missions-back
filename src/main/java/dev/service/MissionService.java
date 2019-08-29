@@ -97,4 +97,19 @@ public class MissionService {
         return this.missionRepo.save(mission);
     }
 
+    public List<Mission> getMissionsEchuesByAnnee(Long idCollegue, int annee) {
+        return this.missionRepo.findAll().stream()
+                .filter(mission -> mission.getCollegue().getId() == idCollegue && mission.getStatut().equals(StatutMission.VALIDEE)
+                        && mission.getEndDate().getYear() == annee
+                        && mission.getEndDate().isBefore(LocalDate.now()))
+                .collect(Collectors.toList());
+    }
+
+    public List<Mission> getMissionsEchues(Long idCollegue) {
+        return this.missionRepo.findAll().stream()
+                .filter(mission -> mission.getCollegue().getId() == idCollegue && mission.getStatut().equals(StatutMission.VALIDEE)
+                        && mission.getEndDate().isBefore(LocalDate.now()))
+                .collect(Collectors.toList());
+    }
+
 }
