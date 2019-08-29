@@ -3,6 +3,7 @@ package dev.domain;
 import java.util.List;
 import java.util.Objects;
 
+
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -32,15 +33,18 @@ public class Collegue {
 
     @Enumerated(EnumType.STRING)
     private Departement departement;
-    
-    @OneToMany(mappedBy = "collegue", cascade = CascadeType.PERSIST)
-    @JsonIgnore
-    private List<NoteDeFrais> notesDeFrais; 
-    
+
+//    @OneToMany(mappedBy = "collegue", cascade = CascadeType.PERSIST)
+//    @JsonIgnore
+//    private List<NoteDeFrais> notesDeFrais; 
+
     /*
-    @OneToMany(cascade=CascadeType.ALL)
-    @JoinTable(name="collegue_notesdefrais_mapping",joinColumns=@JoinColumn(name="collegue_id"),inverseJoinColumns=@JoinColumn(name="notedefrais_id"))
-    private List<NoteDeFrais> notesDeFrais; */
+     * @OneToMany(cascade=CascadeType.ALL)
+     * 
+     * @JoinTable(name="collegue_notesdefrais_mapping",joinColumns=@JoinColumn(name=
+     * "collegue_id"),inverseJoinColumns=@JoinColumn(name="notedefrais_id")) private
+     * List<NoteDeFrais> notesDeFrais;
+     */
 
     public Long getId() {
         return id;
@@ -106,17 +110,17 @@ public class Collegue {
         this.departement = departement;
     }
 
-	public List<NoteDeFrais> getNotesDeFrais() {
-		return notesDeFrais;
-	}
-
-	public void setNotesDeFrais(List<NoteDeFrais> notesDeFrais) {
-		this.notesDeFrais = notesDeFrais;
-	}
-    
-	public void addNotesDeFrais(NoteDeFrais noteDeFrais){
-		this.notesDeFrais.add(noteDeFrais);
-	}
+//    public List<NoteDeFrais> getNotesDeFrais() {
+//        return notesDeFrais;
+//    }
+//
+//    public void setNotesDeFrais(List<NoteDeFrais> notesDeFrais) {
+//        this.notesDeFrais = notesDeFrais;
+//    }
+//
+//    public void addNotesDeFrais(NoteDeFrais noteDeFrais) {
+//        this.notesDeFrais.add(noteDeFrais);
+//    }
 
     @Override
     public boolean equals(Object o) {
