@@ -71,7 +71,6 @@ public class MissionController {
         return this.missionService.validerMission(isValidated, mission);
     }
 
-    @Secured("ROLE_MANAGER")
     @RequestMapping(method = RequestMethod.GET, path = "/update")
     public void forcerTraitementNuit() {
         traitementDeNuitService.traitementDeNuit();

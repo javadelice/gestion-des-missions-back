@@ -159,7 +159,7 @@ public class Mission {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append(", startDate=");
+        builder.append("startDate=");
         builder.append(startDate);
         builder.append(", endDate=");
         builder.append(endDate);
