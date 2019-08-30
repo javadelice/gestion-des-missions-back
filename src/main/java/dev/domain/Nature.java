@@ -36,7 +36,8 @@ public class Nature {
 
     private LocalDate finValidite;
 
-    @OneToMany(mappedBy = "nature", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+
+    @OneToMany(mappedBy = "nature", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Mission> listeMissions;
 
@@ -173,6 +174,45 @@ public class Nature {
         builder.append("]");
         return builder.toString();
     }
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((debutValidite == null) ? 0 : debutValidite.hashCode());
+		result = prime * result + ((depassPlafond == null) ? 0 : depassPlafond.hashCode());
+		result = prime * result + ((finValidite == null) ? 0 : finValidite.hashCode());
+		result = prime * result + ((hasPrime == null) ? 0 : hasPrime.hashCode());
+		result = prime * result + ((isFacturee == null) ? 0 : isFacturee.hashCode());
+		result = prime * result + plafondFrais;
+		long temp;
+		temp = Double.doubleToLongBits(pourcentagePrime);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + tjm;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Nature other = (Nature) obj;
+		if (hasPrime != other.hasPrime)
+			return false;
+		if (isFacturee != other.isFacturee)
+			return false;
+		if (plafondFrais != other.plafondFrais)
+			return false;
+		if (Double.doubleToLongBits(pourcentagePrime) != Double.doubleToLongBits(other.pourcentagePrime))
+			return false;
+		if (tjm != other.tjm)
+			return false;
+		return true;
+	}
 
     
     

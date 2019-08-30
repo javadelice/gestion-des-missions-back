@@ -44,7 +44,10 @@ public class MissionController {
 
     @RequestMapping(method = RequestMethod.DELETE, path = "/missions")
     public void deleteMission(@RequestParam Long id) {
-        this.missionRepo.deleteById(id);
+        Mission mission = this.missionRepo.findById(id).get();
+        if (mission.getStatut().equals(StatutMission.INITIALE) || mission.getStatut().equals(StatutMission.REJETEE)) {
+            this.missionRepo.deleteById(id);
+        }
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "/missions")
@@ -55,8 +58,12 @@ public class MissionController {
 
     @RequestMapping(method = RequestMethod.PATCH, path = "/missions")
     public Mission modifyMission(@RequestBody Mission mission) {
-        mission.setStatut(StatutMission.INITIALE);
-        return this.missionService.createMission(mission);
+        if (mission.getStatut().equals(StatutMission.INITIALE) || mission.getStatut().equals(StatutMission.REJETEE)) {
+            mission.setStatut(StatutMission.INITIALE);
+            return this.missionService.createMission(mission);
+        }
+        return null;
+
     }
 
     @Secured({ "ROLE_MANAGER" })
