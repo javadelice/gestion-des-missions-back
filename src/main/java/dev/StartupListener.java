@@ -105,6 +105,7 @@ public class StartupListener {
         n1.setPlafondFrais(150);
         n1.setDepassPlafond(Choix.OUI);
         n1.setDebutValidite(LocalDate.now());
+        n1.setFinValidite(null);
         this.natureRepo.save(n1);
 
         Nature n2 = new Nature();
@@ -116,6 +117,7 @@ public class StartupListener {
         n2.setPlafondFrais(150);
         n2.setDepassPlafond(Choix.OUI);
         n2.setDebutValidite(LocalDate.now());
+        n2.setFinValidite(null);
         this.natureRepo.save(n2);
 
         Mission m1 = new Mission(LocalDate.now(), LocalDate.now().plusDays(7), n1, "Nantes", "Lyon", Transport.AVION, 100, col1);

@@ -1,7 +1,11 @@
 package dev.service;
 
 import java.util.List;
+import java.time.LocalDate;
+import java.util.Optional;
 
+import dev.exception.NatureIntrouvableException;
+import dev.exception.NatureUtiliseeException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,5 +47,24 @@ public class NatureService {
 }
     public List<Nature> getNature() {
         return natureRepo.findAll();
+    }
+
+    public Nature deleteNature(Long idNature) {
+        Optional<Nature> optionalNature = natureRepo.findById(idNature);
+        Nature nature = optionalNature.orElseThrow(NatureIntrouvableException::new);
+        if (nature.getListeMissions().isEmpty()) {
+            natureRepo.delete(nature);
+            return null;
+        }
+        if (nature.getFinValidite() != null && !nature.getFinValidite().isAfter(LocalDate.now())) {
+            throw new NatureIntrouvableException();
+        }
+        if(nature.getListeMissions().stream().anyMatch(mission -> LocalDate.now().isBefore(mission.getEndDate()))) {
+            throw new NatureUtiliseeException();
+        }
+
+        nature.setFinValidite(LocalDate.now());
+        natureRepo.save(nature);
+        return nature;
     }
 }
