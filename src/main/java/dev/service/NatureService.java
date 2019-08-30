@@ -55,13 +55,14 @@ public class NatureService {
 
     public Nature deleteNature(Long idNature) {
         Optional<Nature> optionalNature = natureRepo.findById(idNature);
-        Nature nature = optionalNature.orElseThrow(NatureIntrouvableException::new);
+        Nature nature = optionalNature.orElseThrow(()-> new NatureIntrouvableException("La nature à supprimer est introuvable"));
         if (nature.getListeMissions().isEmpty()) {
             natureRepo.delete(nature);
             return null;
         }
         if (nature.getFinValidite() != null && !nature.getFinValidite().isAfter(LocalDate.now())) {
-            throw new NatureIntrouvableException();
+            throw new NatureIntrouvableException("La nature à supprimer est introuvable"
+            );
         }
         if(nature.getListeMissions().stream().anyMatch(mission -> LocalDate.now().isBefore(mission.getEndDate()))) {
             throw new NatureUtiliseeException();
@@ -74,10 +75,10 @@ public class NatureService {
 
     public Nature updateNature(Nature nature) {
         Optional<Nature> optionalNature = natureRepo.findById(nature.getId());
-        Nature oldNature = optionalNature.orElseThrow(NatureIntrouvableException::new);
+        Nature oldNature = optionalNature.orElseThrow(()-> new NatureIntrouvableException("La nature à modifier est introuvable"));
 
         if (oldNature.getFinValidite() != null && LocalDate.now().isAfter(oldNature.getFinValidite())) {
-            throw new NatureIntrouvableException();
+            throw new NatureIntrouvableException("La nature à modifier est introuvable");
         }
 
 
@@ -113,7 +114,7 @@ public class NatureService {
 
         oldNature.setFinValidite(LocalDate.now().minusDays(1));
         natureRepo.save(oldNature);
-        
+
         nature.setId(null);
         nature.setFinValidite(null);
         nature.setDebutValidite(LocalDate.now());
