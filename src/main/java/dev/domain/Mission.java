@@ -2,6 +2,7 @@ package dev.domain;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -44,12 +45,10 @@ public class Mission {
 
     @ManyToOne
     @JoinColumn(name = "id_collegue")
-    @JsonIgnore
     private Collegue collegue;
     
     @OneToOne
 	@JoinColumn(name = "id_noteDeFraisCumul")
-    @JsonIgnore
 	 private NoteDeFraisCumul ndfCumul;
 
     public Mission() {
