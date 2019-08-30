@@ -26,6 +26,7 @@ public class Collegue {
 
     private String email;
 
+    @JsonIgnore
     private String motDePasse;
 
     @OneToMany(mappedBy = "collegue", cascade = CascadeType.PERSIST)
@@ -126,5 +127,6 @@ public class Collegue {
 //    public void addNotesDeFrais(NoteDeFrais noteDeFrais) {
 //        this.notesDeFrais.add(noteDeFrais);
 //    }
+
 
 }
