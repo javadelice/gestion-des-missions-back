@@ -3,7 +3,6 @@ package dev.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -38,7 +37,7 @@ public class NoteDeFraisCumul {
     public NoteDeFraisCumul(List<NoteDeFrais> notesDeFrais, Mission mission) {
         super();
 
-        this.notesDeFrais = notesDeFrais;	
+        this.notesDeFrais = notesDeFrais;
         this.mission = mission;
     }
 

@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 @Entity
 public class Mission {
@@ -45,6 +46,7 @@ public class Mission {
 
     @OneToOne
     @JoinColumn(name = "id_noteDeFraisCumul")
+    @Transient
     private NoteDeFraisCumul ndfCumul;
 
     public Mission() {

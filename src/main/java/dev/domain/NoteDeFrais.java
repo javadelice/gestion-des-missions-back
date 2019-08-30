@@ -31,23 +31,17 @@ public class NoteDeFrais {
     @JsonIgnore
     private NoteDeFraisCumul ndfCumul;
 
-//	 @ManyToOne
-//	 @JoinColumn(name = "collegue")
-//	 private Collegue collegue;
-
     public NoteDeFrais() {
 
     }
 
-    public NoteDeFrais(LocalDate date, Double montant, NdfNature nature, NoteDeFraisCumul ndfCumul,
-            Collegue collegue) {
+    public NoteDeFrais(LocalDate date, Double montant, NdfNature nature, NoteDeFraisCumul ndfCumul) {
         super();
 
         this.date = date;
         this.nature = nature;
         this.montant = montant;
         this.ndfCumul = ndfCumul;
-//        this.collegue = collegue;
     }
 
     public Long getId() {

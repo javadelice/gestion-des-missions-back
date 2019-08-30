@@ -1,5 +1,6 @@
 package dev.service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -23,9 +24,15 @@ public class NoteDeFraisCumulService {
 
     public NoteDeFraisCumul findByMission(Long idMission) {
 
-        return this.noteDeFraisCumulRepo.findAll().stream()
+        List<NoteDeFraisCumul> ndfCumul = this.noteDeFraisCumulRepo.findAll().stream()
                 .filter(ndf -> ndf.getMission().getId() == idMission)
-                .collect(Collectors.toList()).get(0);
+                .collect(Collectors.toList());
+
+        if (ndfCumul.isEmpty()) {
+            return null;
+        }
+
+        return ndfCumul.get(0);
 //		
 //		return noteDeFraisCumulRepo.findByMission(this.missionRepo.findById(id).get());
 

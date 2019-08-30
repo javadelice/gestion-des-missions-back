@@ -128,7 +128,7 @@ public class StartupListener {
         n2.setFinValidite(null);
         this.natureRepo.save(n2);
 
-        Mission m1 = new Mission(LocalDate.now(), LocalDate.now().plusDays(7), n1, "Nantes", "Lyon", Transport.AVION, 100, col1);
+        Mission m1 = new Mission(LocalDate.now(), LocalDate.now().plusDays(7), n1, "Nantes", "Lyon", Transport.AVION, 1000, col1);
         this.missionRepo.saveAndFlush(m1);
 
         Mission m2 = new Mission(LocalDate.now(), LocalDate.now().plusDays(10), n2, "Nantes", "Rennes", Transport.COVOITURAGE, 150, col2);
@@ -164,24 +164,26 @@ public class StartupListener {
         m20.setStatut(StatutMission.VALIDEE);
         this.missionRepo.saveAndFlush(m20);
 
+        Mission m21 = new Mission(LocalDate.of(2019, Month.JULY, 22), LocalDate.of(2019, Month.JULY, 25), n2, "Rennes", "Paris", Transport.TRAIN, 850,
+                col1);
+        m21.setStatut(StatutMission.VALIDEE);
+        this.missionRepo.saveAndFlush(m21);
+
         NoteDeFrais noteDeFrais = new NoteDeFrais();
         noteDeFrais.setDate(LocalDate.of(2019, Month.AUGUST, 15));
         noteDeFrais.setMontant(78.35);
         noteDeFrais.setNature(NdfNature.AVION);
-
         this.ndfRepo.save(noteDeFrais);
 
         NoteDeFrais noteDeFrais2 = new NoteDeFrais();
         noteDeFrais2.setDate(LocalDate.of(2018, Month.MAY, 20));
         noteDeFrais2.setMontant(25.20);
         noteDeFrais2.setNature(NdfNature.TRAIN);
-
         this.ndfRepo.save(noteDeFrais2);
 
         NoteDeFraisCumul ndfCumul1 = new NoteDeFraisCumul();
-        ndfCumul1.setMission(m3);
+        ndfCumul1.setMission(m21);
         ndfCumul1.addNotesDeFrais(noteDeFrais);
-
         this.ndfCumulRepo.save(ndfCumul1);
 
         NoteDeFraisCumul ndfCumul2 = new NoteDeFraisCumul();
@@ -195,18 +197,18 @@ public class StartupListener {
         this.ndfRepo.save(noteDeFrais);
         noteDeFrais2.setNdfCumul(ndfCumul1);
         this.ndfRepo.save(noteDeFrais2);
-        m3.setNdfCumul(ndfCumul1);
-        this.missionRepo.save(m3);
-        m1.setNdfCumul(ndfCumul2);
-        this.missionRepo.save(m1);
+//        m21.setNdfCumul(ndfCumul1);
+//        this.missionRepo.save(m21);
+//        m1.setNdfCumul(ndfCumul2);
+//        this.missionRepo.save(m1);
 
-        NoteDeFrais noteDeFrais3 = new NoteDeFrais(LocalDate.of(2018, Month.MARCH, 20), 25.20, NdfNature.HOTEL, ndfCumul2, col2);
+        NoteDeFrais noteDeFrais3 = new NoteDeFrais(LocalDate.of(2018, Month.MARCH, 20), 25.20, NdfNature.HOTEL, ndfCumul2);
         this.ndfRepo.save(noteDeFrais3);
 
-        NoteDeFrais noteDeFrais4 = new NoteDeFrais(LocalDate.of(2018, Month.JUNE, 25), 34.51, NdfNature.CARBURANT, ndfCumul1, col3);
+        NoteDeFrais noteDeFrais4 = new NoteDeFrais(LocalDate.of(2018, Month.JUNE, 25), 34.51, NdfNature.CARBURANT, ndfCumul1);
         this.ndfRepo.save(noteDeFrais4);
 
-        NoteDeFrais noteDeFrais5 = new NoteDeFrais(LocalDate.of(2018, Month.APRIL, 11), 34.51, NdfNature.CARBURANT, ndfCumul1, col3);
+        NoteDeFrais noteDeFrais5 = new NoteDeFrais(LocalDate.of(2018, Month.APRIL, 11), 34.51, NdfNature.CARBURANT, ndfCumul1);
         this.ndfRepo.save(noteDeFrais5);
 
     }
