@@ -129,7 +129,8 @@ public class StartupListener {
         n2.setFinValidite(null);
         this.natureRepo.save(n2);
 
-        Mission m1 = new Mission(LocalDate.now(), LocalDate.now().plusDays(7), n1, "Nantes", "Lyon", Transport.AVION, 100, col1);
+        Mission m1 = new Mission(LocalDate.now().minusDays(9), LocalDate.now().minusDays(7), n1, "Nantes", "Lyon", Transport.AVION, 100, col1);
+        m1.setStatut(StatutMission.VALIDEE);
         this.missionRepo.saveAndFlush(m1);
 
         Mission m2 = new Mission(LocalDate.now(), LocalDate.now().plusDays(10), n2, "Nantes", "Rennes", Transport.COVOITURAGE, 150, col2);
