@@ -74,11 +74,6 @@ public class MissionController {
         return this.missionService.validerMission(isValidated, mission);
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/missionsechuesannee")
-    public List<Mission> getMissionsEchuesByAnnee(@RequestParam Long idCollegue, @RequestParam int annee) {
-        return this.missionService.getMissionsEchuesByAnnee(idCollegue, annee);
-    }
-
     @RequestMapping(method = RequestMethod.GET, path = "/missionsechues")
     public List<Mission> getMissionsEchues(@RequestParam Long idCollegue) {
         return this.missionService.getMissionsEchues(idCollegue);
