@@ -64,13 +64,24 @@ public class TraitementDeNuitService {
         missionsACalculer.stream().filter(mission -> mission.getEndDate().isBefore(LocalDate.now()) && mission.getStatut().equals(StatutMission.VALIDEE))
         .forEach(mission -> {
             LOG.info("Calcul de la prime de la mission " + mission.toString());
+
+            double fraisTotaux = mission.getNdfCumul() != null ?
+                                    mission.getNdfCumul().getNotesDeFrais() != null ?
+                                        mission.getNdfCumul().getNotesDeFrais().stream().mapToDouble(noteDeFrais -> noteDeFrais.getMontant()).sum()
+                    : 0 : 0;
+
+            double depassement = fraisTotaux - Period.between(mission.getStartDate(), mission.getEndDate()).getDays() * mission.getNature().getPlafondFrais();
+            depassement = depassement > 0 ? depassement : 0;
             mission.setPrime(
                     (int) Math.ceil(Period.between(mission.getStartDate(), mission.getEndDate()).getDays()
                             * mission.getNature().getTjm()
                             * mission.getNature().getPourcentagePrime()/100
-                            //TODO : Enlever les dépassements de frais de la prime
+                            - depassement
                             )
             );
+            if (mission.getPrime() < 0) {
+                mission.setPrime(0);
+            }
 
             mission.setPrimeACalculer(false);
 
