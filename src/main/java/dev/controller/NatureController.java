@@ -5,11 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import dev.domain.Nature;
 import dev.repository.NatureRepo;
@@ -36,11 +32,17 @@ public class NatureController {
     public List<Nature> getNatures() {
         return this.natureRepo.findAll();
     }
-    
+
+    @Secured("ROLE_ADMINISTRATEUR")
     @RequestMapping(method = RequestMethod.POST, path = "/nature")
     public Nature createNature(@RequestBody Nature nature) {
     	nature.setDebutValidite(LocalDate.now());
         return this.natureService.createNature(nature);
     }
 
+    @Secured("ROLE_ADMINISTRATEUR")
+    @RequestMapping(method = RequestMethod.DELETE, path = "/nature")
+    public Nature deleteNature(@RequestParam Long id) {
+        return natureService.deleteNature(id);
+    }
 }
