@@ -87,7 +87,6 @@ public class StartupListener {
         col2.setDepartement(Departement.D2);
         this.collegueRepo.save(col2);
 
-        
         Collegue col4 = new Collegue();
         col4.setNom("User2");
         col4.setPrenom("DEV");
@@ -159,6 +158,11 @@ public class StartupListener {
                 col3);
         m7.setStatut(StatutMission.EN_ATTENTE_VALIDATION);
         this.missionRepo.saveAndFlush(m7);
+
+        Mission m20 = new Mission(LocalDate.of(2019, Month.JULY, 15), LocalDate.of(2019, Month.JULY, 19), n2, "Rennes", "Paris", Transport.AVION, 0,
+                col1);
+        m20.setStatut(StatutMission.VALIDEE);
+        this.missionRepo.saveAndFlush(m20);
 
         NoteDeFrais noteDeFrais = new NoteDeFrais();
         noteDeFrais.setDate(LocalDate.of(2019, Month.AUGUST, 15));

@@ -8,12 +8,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Mission {
@@ -44,13 +41,11 @@ public class Mission {
 
     @ManyToOne
     @JoinColumn(name = "id_collegue")
-    @JsonIgnore
     private Collegue collegue;
-    
+
     @OneToOne
-	@JoinColumn(name = "id_noteDeFraisCumul")
-    @JsonIgnore
-	 private NoteDeFraisCumul ndfCumul;
+    @JoinColumn(name = "id_noteDeFraisCumul")
+    private NoteDeFraisCumul ndfCumul;
 
     public Mission() {
         this.statut = StatutMission.INITIALE;
@@ -176,12 +171,12 @@ public class Mission {
         return builder.toString();
     }
 
-	public NoteDeFraisCumul getNdfCumul() {
-		return ndfCumul;
-	}
+    public NoteDeFraisCumul getNdfCumul() {
+        return ndfCumul;
+    }
 
-	public void setNdfCumul(NoteDeFraisCumul ndfCumul) {
-		this.ndfCumul = ndfCumul;
-	}
+    public void setNdfCumul(NoteDeFraisCumul ndfCumul) {
+        this.ndfCumul = ndfCumul;
+    }
 
 }
