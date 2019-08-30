@@ -151,10 +151,24 @@ public class StartupListener {
         m7.setStatut(StatutMission.EN_ATTENTE_VALIDATION);
         this.missionRepo.saveAndFlush(m7);
 
-        Mission m8 = new Mission(LocalDate.now().minusDays(14), LocalDate.now().minusDays(12), n1, "Nantes", "Lille", Transport.TRAIN, 0,
-                col3);
+
+        Mission m8 = new Mission(LocalDate.of(2019, Month.JULY, 8), LocalDate.of(2019, Month.JULY, 12), n2, "Nantes", "Lorient", Transport.AVION,
+                150,
+                col1);
         m8.setStatut(StatutMission.VALIDEE);
         this.missionRepo.saveAndFlush(m8);
+
+        Mission m9 = new Mission(LocalDate.of(2019, Month.AUGUST, 5), LocalDate.of(2019, Month.AUGUST, 8), n1, "Nantes", "Nancy",
+                Transport.COVOITURAGE,
+                250,
+                col1);
+        m9.setStatut(StatutMission.VALIDEE);
+        this.missionRepo.saveAndFlush(m9);
+
+        Mission m10 = new Mission(LocalDate.of(2018, Month.SEPTEMBER, 18), LocalDate.of(2018, Month.SEPTEMBER, 21), n2, "Nantes", "Lyon",
+                Transport.TRAIN, 225, col1);
+        m10.setStatut(StatutMission.VALIDEE);
+        this.missionRepo.saveAndFlush(m10);
 
         NoteDeFrais noteDeFrais = new NoteDeFrais();
         noteDeFrais.setDate(LocalDate.of(2019, Month.AUGUST, 15));

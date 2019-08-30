@@ -82,4 +82,10 @@ public class MissionController {
     public void forcerTraitementNuit() {
         traitementDeNuitService.traitementDeNuit();
     }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/missionsechues")
+    public List<Mission> getMissionsEchues(@RequestParam Long idCollegue) {
+        return this.missionService.getMissionsEchues(idCollegue);
+    }
+
 }
