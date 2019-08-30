@@ -2,6 +2,7 @@ package dev.domain;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -44,8 +45,13 @@ public class Mission {
     private Collegue collegue;
 
     @OneToOne
+<<<<<<< HEAD
     @JoinColumn(name = "id_noteDeFraisCumul")
     private NoteDeFraisCumul ndfCumul;
+=======
+	@JoinColumn(name = "id_noteDeFraisCumul")
+	 private NoteDeFraisCumul ndfCumul;
+>>>>>>> 55ccd9cffefacb539df015a60f4e287fd2e643ad
 
     public Mission() {
         this.statut = StatutMission.INITIALE;
