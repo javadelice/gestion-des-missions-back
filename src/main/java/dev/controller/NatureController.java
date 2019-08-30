@@ -45,4 +45,10 @@ public class NatureController {
     public Nature deleteNature(@RequestParam Long id) {
         return natureService.deleteNature(id);
     }
+
+    @Secured("ROLE_ADMINISTRATEUR")
+    @RequestMapping(method = RequestMethod.PATCH, path = "/nature")
+    public Nature deleteNature(@RequestBody Nature nature) {
+        return natureService.updateNature(nature);
+    }
 }
