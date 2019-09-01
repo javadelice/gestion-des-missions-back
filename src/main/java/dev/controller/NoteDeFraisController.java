@@ -78,7 +78,7 @@ public class NoteDeFraisController {
     @PostMapping(path= "/lignedefrais")
     public NoteDeFrais CreerNdf(@RequestBody NoteDeFrais noteDeFrais) {
     	
-    	return ndfRepo.save(noteDeFrais);
+    	return ndfRepo.save(ndfService.verifyLigneDeFrais(noteDeFrais));
     	//imp cas où paramètres incorrects	
     }
     
@@ -90,7 +90,7 @@ public class NoteDeFraisController {
     @PatchMapping(path= "/lignedefrais")
     public NoteDeFrais patchNdf(@RequestBody NoteDeFrais noteDeFrais) {
     	
-		return ndfRepo.save(noteDeFrais);
+		return ndfRepo.save(ndfService.verifyLigneDeFrais(noteDeFrais));
     	
     }
     

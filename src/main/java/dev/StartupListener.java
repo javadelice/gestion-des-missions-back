@@ -207,7 +207,7 @@ public class StartupListener {
         NoteDeFrais noteDeFrais4 = new NoteDeFrais(LocalDate.of(2018, Month.JUNE, 25), 34.51, NdfNature.CARBURANT, ndfCumul1, col3);
         this.ndfRepo.save(noteDeFrais4);
 
-        NoteDeFrais noteDeFrais5 = new NoteDeFrais(LocalDate.of(2018, Month.APRIL, 11), 34.51, NdfNature.CARBURANT, ndfCumul1, col3);
+        NoteDeFrais noteDeFrais5 = new NoteDeFrais(LocalDate.of(2018, Month.APRIL, 11), 34.51, NdfNature.DEJEUNER, ndfCumul1, col3);
         this.ndfRepo.save(noteDeFrais5);
 
     }
