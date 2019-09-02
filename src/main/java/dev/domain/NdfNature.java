@@ -1,5 +1,6 @@
 package dev.domain;
 
+
 public enum NdfNature {
 
 	ACTIVITE, HOTEL, 
