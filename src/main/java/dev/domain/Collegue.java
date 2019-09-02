@@ -42,14 +42,14 @@ public class Collegue {
 
 //    @OneToMany(mappedBy = "collegue", cascade = CascadeType.PERSIST)
 //    @JsonIgnore
-//    private List<NoteDeFrais> notesDeFrais; 
+//    private List<LigneDeFrais> notesDeFrais;
 
     /*
      * @OneToMany(cascade=CascadeType.ALL)
      * 
      * @JoinTable(name="collegue_notesdefrais_mapping",joinColumns=@JoinColumn(name=
      * "collegue_id"),inverseJoinColumns=@JoinColumn(name="notedefrais_id")) private
-     * List<NoteDeFrais> notesDeFrais;
+     * List<LigneDeFrais> notesDeFrais;
      */
 
     public Long getId() {
@@ -116,15 +116,15 @@ public class Collegue {
         this.departement = departement;
     }
 
-//    public List<NoteDeFrais> getNotesDeFrais() {
+//    public List<LigneDeFrais> getNotesDeFrais() {
 //        return notesDeFrais;
 //    }
 //
-//    public void setNotesDeFrais(List<NoteDeFrais> notesDeFrais) {
+//    public void setNotesDeFrais(List<LigneDeFrais> notesDeFrais) {
 //        this.notesDeFrais = notesDeFrais;
 //    }
 //
-//    public void addNotesDeFrais(NoteDeFrais noteDeFrais) {
+//    public void addNotesDeFrais(LigneDeFrais noteDeFrais) {
 //        this.notesDeFrais.add(noteDeFrais);
 //    }
 

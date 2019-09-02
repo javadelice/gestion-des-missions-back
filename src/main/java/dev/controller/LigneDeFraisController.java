@@ -1,16 +1,11 @@
 package dev.controller;
 
 import java.util.List;
-import java.util.Optional;
 
-import javax.persistence.criteria.Path;
-
+import dev.repository.LigneDeFrais;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,36 +15,29 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import dev.controller.vm.CollegueVM;
-import dev.domain.Mission;
-import dev.domain.NoteDeFrais;
-import dev.domain.StatutMission;
-import dev.repository.CollegueRepo;
-import dev.repository.NoteDeFraisRepo;
 import dev.service.NoteDeFraisCumulService;
-import dev.service.NoteDeFraisService;
 
 @RestController
 @CrossOrigin(allowCredentials = "true")
-public class NoteDeFraisController {
+public class LigneDeFraisController {
 	
 	@Autowired
-	private NoteDeFraisRepo ndfRepo;
+	private LigneDeFrais ndfRepo;
 	
 	@Autowired 
-	private NoteDeFraisService ndfService;
+	private dev.service.LigneDeFrais ndfService;
 	
 	@Autowired 
 	private NoteDeFraisCumulService ndfCumulService;
 
-	public NoteDeFraisController(NoteDeFraisRepo ndfRepo) {
+	public LigneDeFraisController(LigneDeFrais ndfRepo) {
         this.ndfRepo=ndfRepo;
     }
 	
 	
     
 	@RequestMapping(method = RequestMethod.GET, path= "/notedefrais/{id}")
-    public List<NoteDeFrais> getNotesDeFraisFromId (@PathVariable Long id){
+    public List<dev.domain.LigneDeFrais> getNotesDeFraisFromId (@PathVariable Long id){
 
     	return ndfService.findByNdfCumulId(id);
    
@@ -62,7 +50,7 @@ public class NoteDeFraisController {
 	 */
 	
     @RequestMapping(method = RequestMethod.GET, path= "/notedefrais")//, params = "mission")
-    public List<NoteDeFrais> getNoteDeFraisFromMission (@RequestParam Long mission){
+    public List<dev.domain.LigneDeFrais> getNoteDeFraisFromMission (@RequestParam Long mission){
 
     	//return ndfService.findByNdfCumulId(ndfCumulService.findByMission(id).get().getId());
    
@@ -76,9 +64,9 @@ public class NoteDeFraisController {
 	 */
     
     @PostMapping(path= "/lignedefrais")
-    public NoteDeFrais CreerNdf(@RequestBody NoteDeFrais noteDeFrais) {
+    public dev.domain.LigneDeFrais CreerNdf(@RequestBody dev.domain.LigneDeFrais ligneDeFrais) {
     	
-    	return ndfRepo.save(ndfService.verifyLigneDeFrais(noteDeFrais));
+    	return ndfRepo.save(ndfService.verifyLigneDeFrais(ligneDeFrais));
     	//imp cas où paramètres incorrects	
     }
     
@@ -88,9 +76,9 @@ public class NoteDeFraisController {
 	 */
     
     @PatchMapping(path= "/lignedefrais")
-    public NoteDeFrais patchNdf(@RequestBody NoteDeFrais noteDeFrais) {
+    public dev.domain.LigneDeFrais patchNdf(@RequestBody dev.domain.LigneDeFrais ligneDeFrais) {
     	
-		return ndfRepo.save(ndfService.verifyLigneDeFrais(noteDeFrais));
+		return ndfRepo.save(ndfService.verifyLigneDeFrais(ligneDeFrais));
     	
     }
     

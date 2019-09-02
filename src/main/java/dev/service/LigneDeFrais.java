@@ -10,20 +10,18 @@ import dev.exception.NoteDeFraisNonTrouveeException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import dev.domain.NoteDeFrais;
 import dev.repository.CollegueRepo;
 import dev.repository.MissionRepo;
 import dev.repository.NoteDeFraisCumulRepo;
-import dev.repository.NoteDeFraisRepo;
 
 @Service
-public class NoteDeFraisService {
+public class LigneDeFrais {
 
     @Autowired
     NoteDeFraisCumulRepo noteDeFraisCumulRepo;
 
     @Autowired
-    NoteDeFraisRepo noteDeFraisRepo;
+    dev.repository.LigneDeFrais ligneDeFrais;
 
     @Autowired
     CollegueRepo collegueRepo;
@@ -31,19 +29,19 @@ public class NoteDeFraisService {
     @Autowired
     MissionRepo missionRepo;
 
-    public NoteDeFraisService() {
+    public LigneDeFrais() {
     }
 
-    public Optional<NoteDeFrais> findById(Long id) {
+    public Optional<dev.domain.LigneDeFrais> findById(Long id) {
 
-        return noteDeFraisRepo.findById(id);
+        return ligneDeFrais.findById(id);
 
     }
 
-    public List<NoteDeFrais> findByNdfCumulId(Long id) {
-        List<NoteDeFrais> list = new ArrayList<>();
+    public List<dev.domain.LigneDeFrais> findByNdfCumulId(Long id) {
+        List<dev.domain.LigneDeFrais> list = new ArrayList<>();
         try {
-            list = noteDeFraisRepo.findAll().stream().filter(ndf -> ndf.getNdfCumul().getId() == id)
+            list = ligneDeFrais.findAll().stream().filter(ndf -> ndf.getNdfCumul().getId() == id)
                     .collect(Collectors.toList());
 //
 //		return noteDeFraisCumulRepo.findByMission(this.missionRepo.findById(id).get());
@@ -56,13 +54,13 @@ public class NoteDeFraisService {
 
     }
 
-    public NoteDeFrais verifyLigneDeFrais(NoteDeFrais ldf) {
+    public dev.domain.LigneDeFrais verifyLigneDeFrais(dev.domain.LigneDeFrais ldf) {
         //si la ligne de frais existe
         if (ldf != null) {
 
             //Verification de l'id de note de frais
             try {
-                noteDeFraisRepo.findAll().stream().filter(ndf -> ndf.getNdfCumul().getId() == ldf.getNdfCumul().getId());
+                ligneDeFrais.findAll().stream().filter(ndf -> ndf.getNdfCumul().getId() == ldf.getNdfCumul().getId());
 
             } catch (NullPointerException e) {
                 throw new NoteDeFraisNonTrouveeException("La note de frais associée n'existe pas dans la base.");
@@ -83,13 +81,13 @@ public class NoteDeFraisService {
         return ldf;
     }
 
-//	public List<NoteDeFrais> findByMission(Long id) {
+//	public List<LigneDeFrais> findByMission(Long id) {
 //
 //		Optional<NoteDeFraisCumul> ndfC = noteDeFraisCumulRepo.findByMission(id);
 //
 //		if (ndfC.isPresent()) {
 //
-//			return noteDeFraisRepo.findAll().stream().filter(ndf -> ndf.getNdfCumul().getId() == id)
+//			return ligneDeFrais.findAll().stream().filter(ndf -> ndf.getNdfCumul().getId() == id)
 //					.collect(Collectors.toList());
 //
 //		} else {
@@ -98,9 +96,9 @@ public class NoteDeFraisService {
 //		}
 //	}
 /*
-	public Optional<NoteDeFrais[]> findByCollegue(Collegue col) {
+	public Optional<LigneDeFrais[]> findByCollegue(Collegue col) {
 
-		return null;// NoteDeFraisRepo.fin(Id);
+		return null;// LigneDeFrais.fin(Id);
 
 	}
 */

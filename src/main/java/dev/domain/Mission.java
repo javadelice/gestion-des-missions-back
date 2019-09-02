@@ -43,7 +43,7 @@ public class Mission {
     @JoinColumn(name = "id_collegue")
     private Collegue collegue;
 
-    @OneToOne
+    @OneToOne(mappedBy = "mission")
     @JoinColumn(name = "id_noteDeFraisCumul")
     private NoteDeFraisCumul ndfCumul;
 

@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class NoteDeFrais {
+public class LigneDeFrais {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -35,12 +35,12 @@ public class NoteDeFrais {
 //	 @JoinColumn(name = "collegue")
 //	 private Collegue collegue;
 
-    public NoteDeFrais() {
+    public LigneDeFrais() {
 
     }
 
-    public NoteDeFrais(LocalDate date, Double montant, NdfNature nature, NoteDeFraisCumul ndfCumul,
-            Collegue collegue) {
+    public LigneDeFrais(LocalDate date, Double montant, NdfNature nature, NoteDeFraisCumul ndfCumul,
+                        Collegue collegue) {
         super();
 
         this.date = date;

@@ -3,7 +3,6 @@ package dev.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,7 +22,7 @@ public class NoteDeFraisCumul {
 
     @OneToMany(mappedBy = "ndfCumul")
     @JsonIgnore
-    private List<NoteDeFrais> notesDeFrais;
+    private List<LigneDeFrais> notesDeFrais;
 
     @OneToOne
     @JoinColumn(name = "mission_id")
@@ -32,10 +31,10 @@ public class NoteDeFraisCumul {
 
     public NoteDeFraisCumul() {
         super();
-        this.notesDeFrais = new ArrayList<NoteDeFrais>();
+        this.notesDeFrais = new ArrayList<LigneDeFrais>();
     }
 
-    public NoteDeFraisCumul(List<NoteDeFrais> notesDeFrais, Mission mission) {
+    public NoteDeFraisCumul(List<LigneDeFrais> notesDeFrais, Mission mission) {
         super();
 
         this.notesDeFrais = notesDeFrais;	
@@ -50,16 +49,16 @@ public class NoteDeFraisCumul {
         this.id = id;
     }
 
-    public List<NoteDeFrais> getNotesDeFrais() {
+    public List<LigneDeFrais> getNotesDeFrais() {
         return notesDeFrais;
     }
 
-    public void setNotesDeFrais(List<NoteDeFrais> notesDeFrais) {
+    public void setNotesDeFrais(List<LigneDeFrais> notesDeFrais) {
         this.notesDeFrais = notesDeFrais;
     }
 
-    public void addNotesDeFrais(NoteDeFrais noteDeFrais) {
-        this.notesDeFrais.add(noteDeFrais);
+    public void addNotesDeFrais(LigneDeFrais ligneDeFrais) {
+        this.notesDeFrais.add(ligneDeFrais);
     }
 
     public Mission getMission() {
