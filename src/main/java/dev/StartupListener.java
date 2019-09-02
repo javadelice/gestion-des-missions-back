@@ -96,6 +96,8 @@ public class StartupListener {
         col3.setDepartement(Departement.D2);
         this.collegueRepo.save(col3);
 
+        // Création de 3 natures de mission différentes
+
         Nature n1 = new Nature();
         n1.setCode("Conseil");
         n1.setIsFacturee(Choix.OUI);
@@ -130,6 +132,8 @@ public class StartupListener {
         n3.setDebutValidite(LocalDate.of(2018, Month.JULY, 28));
         n3.setFinValidite(null);
         this.natureRepo.save(n3);
+
+        // Création d'un jeu de missions
 
         Mission m1 = new Mission(LocalDate.of(2019, Month.SEPTEMBER, 3), LocalDate.of(2019, Month.SEPTEMBER, 9), n1, "Nantes", "Lyon",
                 Transport.AVION, 100, col1);
@@ -189,22 +193,22 @@ public class StartupListener {
         this.missionRepo.saveAndFlush(m10);
 
         Mission m11 = new Mission(LocalDate.of(2018, Month.MARCH, 12), LocalDate.of(2018, Month.MARCH, 14), n3, "Nantes", "Lyon",
-                Transport.TRAIN, 225, col1);
+                Transport.TRAIN, 0, col1);
         m11.setStatut(StatutMission.VALIDEE);
         this.missionRepo.saveAndFlush(m11);
+
+        // Création d'un jeu de notes de frais
 
         NoteDeFrais noteDeFrais = new NoteDeFrais();
         noteDeFrais.setDate(LocalDate.of(2019, Month.AUGUST, 15));
         noteDeFrais.setMontant(78.35);
         noteDeFrais.setNature(NdfNature.AVION);
-//        noteDeFrais.setCollegue(col3);
         this.ndfRepo.save(noteDeFrais);
 
         NoteDeFrais noteDeFrais2 = new NoteDeFrais();
         noteDeFrais2.setDate(LocalDate.of(2018, Month.MAY, 20));
         noteDeFrais2.setMontant(25.20);
         noteDeFrais2.setNature(NdfNature.TRAIN);
-//        noteDeFrais2.setCollegue(col2);
         this.ndfRepo.save(noteDeFrais2);
 
         NoteDeFraisCumul ndfCumul1 = new NoteDeFraisCumul();
