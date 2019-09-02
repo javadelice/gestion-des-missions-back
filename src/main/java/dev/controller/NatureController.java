@@ -2,6 +2,7 @@ package dev.controller;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -17,20 +18,16 @@ public class NatureController {
 
     @Autowired
     private NatureRepo natureRepo;
-	
-	@Autowired
+    
+    @Autowired
     private NatureService natureService;
 
-    // Accès à la page "nature" qu'à ceux ayant le rôle d'administrateur
-    @Secured("ROLE_ADMINISTRATEUR")
     @RequestMapping(method = RequestMethod.GET, path = "/nature")
     public List<Nature> getNature() {
-        return natureRepo.findAll();
-    }
-
-    @RequestMapping(method = RequestMethod.GET, path = "/natures")
-    public List<Nature> getNatures() {
-        return this.natureRepo.findAll();
+        return natureRepo.findAll().stream()
+                .filter(natureAFiltrer -> (natureAFiltrer.getFinValidite() == null
+                        || !LocalDate.now().isAfter(natureAFiltrer.getFinValidite())))
+                .collect(Collectors.toList());
     }
 
     @Secured("ROLE_ADMINISTRATEUR")
@@ -44,5 +41,11 @@ public class NatureController {
     @RequestMapping(method = RequestMethod.DELETE, path = "/nature")
     public Nature deleteNature(@RequestParam Long id) {
         return natureService.deleteNature(id);
+    }
+
+    @Secured("ROLE_ADMINISTRATEUR")
+    @RequestMapping(method = RequestMethod.PATCH, path = "/nature")
+    public Nature deleteNature(@RequestBody Nature nature) {
+        return natureService.updateNature(nature);
     }
 }
