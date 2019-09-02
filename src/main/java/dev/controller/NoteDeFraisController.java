@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dev.domain.NdfDTO;
+import dev.exception.NoteDeFraisNonTrouveeException;
+import dev.repository.MissionRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -32,6 +34,9 @@ public class NoteDeFraisController {
 
     @Autowired
     private NoteDeFraisService ndfService;
+
+    @Autowired
+    private MissionRepo missionRepo;
 
     @Autowired
     private NoteDeFraisCumulService ndfCumulService;
@@ -73,19 +78,8 @@ public class NoteDeFraisController {
     @PostMapping(path = "/lignedefrais")
     public NoteDeFrais creerNdf(@RequestBody NdfDTO noteDeFraisDTO) {
 
-        NoteDeFraisCumul noteDeFraisCumul = this.ndfCumulService.findByMission(noteDeFraisDTO.getIdMission());
-        if (noteDeFraisDTO.getDate().isBefore(noteDeFraisCumul.getMission().getStartDate())
-                || noteDeFraisDTO.getDate().isAfter(noteDeFraisCumul.getMission().getEndDate())) {
-            throw new LigneDeFraisInvalideException("Ligne de frais invalide ! La date doit être comprise dans les dates de la mission.");
-        }
-        if (noteDeFraisDTO.getMontant() <= 0) {
-            throw new LigneDeFraisInvalideException("Ligne de frais invalide ! Le montant doit être supérieur à 0");
-        }
 
-        NoteDeFrais noteDeFrais = new NoteDeFrais(noteDeFraisDTO.getDate(), noteDeFraisDTO.getMontant(), noteDeFraisDTO.getNature(), noteDeFraisCumul);
-        ndfRepo.save(noteDeFrais);
-
-        return noteDeFrais;
+        return ndfService.createLigneDeFrais(noteDeFraisDTO);
 
         /**
          * La méthode creerNdf permet d'ajouter la note de frais donné en paramètre
@@ -107,12 +101,11 @@ public class NoteDeFraisController {
 
     @DeleteMapping(path = "/lignedefrais")
     public void deleteMission(@RequestParam Long id) {
+
+        NoteDeFrais ndf = ndfRepo.findById(id).orElseThrow(() -> new NoteDeFraisNonTrouveeException("Note de frais introuvable"));
+
+        ndf.getNdfCumul().getMission().setPrimeACalculer(true);
+        missionRepo.save(ndf.getNdfCumul().getMission());
         this.ndfRepo.deleteById(id);
     }
-
-    @PostMapping(path = "/notedefrais")
-    public NoteDeFraisCumul createNdfCumul(@RequestBody NoteDeFraisCumul ndfCumul) {
-        return this.ndfCumulService.createNdfCumul(ndfCumul);
-    }
-
 }
