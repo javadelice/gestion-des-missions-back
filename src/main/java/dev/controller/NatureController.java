@@ -6,7 +6,12 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import dev.domain.Nature;
 import dev.repository.NatureRepo;
@@ -18,7 +23,7 @@ public class NatureController {
 
     @Autowired
     private NatureRepo natureRepo;
-    
+
     @Autowired
     private NatureService natureService;
 
@@ -33,7 +38,7 @@ public class NatureController {
     @Secured("ROLE_ADMINISTRATEUR")
     @RequestMapping(method = RequestMethod.POST, path = "/nature")
     public Nature createNature(@RequestBody Nature nature) {
-    	nature.setDebutValidite(LocalDate.now());
+        nature.setDebutValidite(LocalDate.now());
         return this.natureService.createNature(nature);
     }
 

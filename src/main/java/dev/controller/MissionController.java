@@ -3,7 +3,6 @@ package dev.controller;
 import java.util.List;
 import java.util.Optional;
 
-import dev.service.TraitementDeNuitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import dev.domain.Choix;
 import dev.domain.Mission;
 import dev.domain.StatutMission;
 import dev.repository.MissionRepo;
 import dev.service.MissionService;
+import dev.service.TraitementDeNuitService;
 
 @CrossOrigin(allowCredentials = "true")
 @RestController
@@ -53,6 +54,11 @@ public class MissionController {
     @RequestMapping(method = RequestMethod.POST, path = "/missions")
     public Mission createMission(@RequestBody Mission mission) {
         mission.setStatut(StatutMission.INITIALE);
+        if (mission.getNature().getHasPrime().equals(Choix.OUI)) {
+            mission.setPrimeACalculer(true);
+        } else {
+            mission.setPrimeACalculer(false);
+        }
         return this.missionService.createMission(mission);
     }
 
