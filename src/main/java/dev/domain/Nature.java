@@ -3,14 +3,7 @@ package dev.domain;
 import java.time.LocalDate;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -21,7 +14,6 @@ public class Nature {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
     private String code;
 
     @Enumerated(EnumType.STRING)
@@ -43,7 +35,8 @@ public class Nature {
 
     private LocalDate finValidite;
 
-    @OneToMany(mappedBy = "nature")
+
+    @OneToMany(mappedBy = "nature", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Mission> listeMissions;
 

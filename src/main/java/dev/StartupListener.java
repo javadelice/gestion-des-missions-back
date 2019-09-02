@@ -98,7 +98,7 @@ public class StartupListener {
         Collegue col3 = new Collegue();
         col3.setNom("Manager");
         col3.setPrenom("DEV");
-        col3.setEmail("manager@dev.fr");
+        col3.setEmail("manager.dev.gdm@gmail.com");
         col3.setMotDePasse(passwordEncoder.encode("superpass"));
         col3.setRoles(Arrays.asList(new RoleCollegue(col3, Role.ROLE_MANAGER), new RoleCollegue(col3, Role.ROLE_UTILISATEUR)));
         col3.setDepartement(Departement.D2);
@@ -112,7 +112,7 @@ public class StartupListener {
         n1.setPourcentagePrime(3.5);
         n1.setPlafondFrais(150);
         n1.setDepassPlafond(Choix.OUI);
-        n1.setDebutValidite(LocalDate.now());
+        n1.setDebutValidite(LocalDate.of(2018, Month.JULY, 28));
         n1.setFinValidite(null);
         this.natureRepo.save(n1);
 
@@ -124,50 +124,86 @@ public class StartupListener {
         n2.setPourcentagePrime(4);
         n2.setPlafondFrais(150);
         n2.setDepassPlafond(Choix.OUI);
-        n2.setDebutValidite(LocalDate.now());
+        n2.setDebutValidite(LocalDate.of(2018, Month.JULY, 28));
         n2.setFinValidite(null);
         this.natureRepo.save(n2);
 
-        Mission m1 = new Mission(LocalDate.now(), LocalDate.now().plusDays(7), n1, "Nantes", "Lyon", Transport.AVION, 1000, col1);
+
+        Nature n3 = new Nature();
+        n3.setCode("Formation");
+        n3.setIsFacturee(Choix.NON);
+        n3.setHasPrime(Choix.NON);
+        n3.setTjm(700);
+        n3.setPlafondFrais(150);
+        n3.setDepassPlafond(Choix.NON);
+        n3.setDebutValidite(LocalDate.of(2018, Month.JULY, 28));
+        n3.setFinValidite(null);
+        this.natureRepo.save(n3);
+
+        Mission m1 = new Mission(LocalDate.of(2019, Month.SEPTEMBER, 3), LocalDate.of(2019, Month.SEPTEMBER, 9), n1, "Nantes", "Lyon",
+                Transport.AVION, 100, col1);
+
         this.missionRepo.saveAndFlush(m1);
 
-        Mission m2 = new Mission(LocalDate.now(), LocalDate.now().plusDays(10), n2, "Nantes", "Rennes", Transport.COVOITURAGE, 150, col2);
+        Mission m2 = new Mission(LocalDate.of(2019, Month.SEPTEMBER, 3), LocalDate.of(2019, Month.SEPTEMBER, 12), n2, "Nantes", "Rennes",
+                Transport.COVOITURAGE, 150, col2);
         this.missionRepo.saveAndFlush(m2);
 
-        Mission m3 = new Mission(LocalDate.now().plusDays(10), LocalDate.now().plusDays(13), n2, "Nantes", "Rennes", Transport.COVOITURAGE, 150,
+        Mission m3 = new Mission(LocalDate.of(2019, Month.SEPTEMBER, 16), LocalDate.of(2019, Month.SEPTEMBER, 20), n2, "Nantes", "Rennes",
+                Transport.COVOITURAGE, 150,
                 col1);
         m3.setStatut(StatutMission.VALIDEE);
         this.missionRepo.saveAndFlush(m3);
 
-        Mission m4 = new Mission(LocalDate.now().plusDays(14), LocalDate.now().plusDays(18), n1, "Nantes", "Bordeaux", Transport.TRAIN, 150,
+        Mission m4 = new Mission(LocalDate.of(2019, Month.SEPTEMBER, 23), LocalDate.of(2019, Month.SEPTEMBER, 26), n1, "Nantes", "Bordeaux",
+                Transport.TRAIN,
+                150,
                 col1);
         m4.setStatut(StatutMission.EN_ATTENTE_VALIDATION);
         this.missionRepo.saveAndFlush(m4);
 
-        Mission m5 = new Mission(LocalDate.now().plusDays(14), LocalDate.now().plusDays(18), n1, "Nantes", "Lille", Transport.VOITURE_DE_SERVICE, 150,
+        Mission m5 = new Mission(LocalDate.of(2019, Month.OCTOBER, 2), LocalDate.of(2019, Month.OCTOBER, 4), n1, "Nantes", "Lille",
+                Transport.VOITURE_DE_SERVICE, 150,
                 col2);
         m5.setStatut(StatutMission.EN_ATTENTE_VALIDATION);
         this.missionRepo.saveAndFlush(m5);
 
-        Mission m6 = new Mission(LocalDate.now().plusDays(20), LocalDate.now().plusDays(21), n1, "Nantes", "Vannes", Transport.AVION, 150,
+        Mission m6 = new Mission(LocalDate.of(2019, Month.NOVEMBER, 12), LocalDate.of(2019, Month.NOVEMBER, 14), n1, "Nantes", "Vannes",
+                Transport.AVION, 150,
                 col2);
         m6.setStatut(StatutMission.EN_ATTENTE_VALIDATION);
         this.missionRepo.saveAndFlush(m6);
 
-        Mission m7 = new Mission(LocalDate.now().plusDays(14), LocalDate.now().plusDays(18), n1, "Nantes", "Lille", Transport.TRAIN, 150,
+        Mission m7 = new Mission(LocalDate.of(2019, Month.NOVEMBER, 18), LocalDate.of(2019, Month.NOVEMBER, 26), n1, "Nantes", "Lille",
+                Transport.TRAIN, 150,
                 col3);
         m7.setStatut(StatutMission.EN_ATTENTE_VALIDATION);
         this.missionRepo.saveAndFlush(m7);
 
-        Mission m20 = new Mission(LocalDate.of(2019, Month.JULY, 15), LocalDate.of(2019, Month.JULY, 19), n2, "Rennes", "Paris", Transport.AVION, 0,
-                col1);
-        m20.setStatut(StatutMission.VALIDEE);
-        this.missionRepo.saveAndFlush(m20);
 
-        Mission m21 = new Mission(LocalDate.of(2019, Month.JULY, 22), LocalDate.of(2019, Month.JULY, 25), n2, "Rennes", "Paris", Transport.TRAIN, 850,
+        Mission m8 = new Mission(LocalDate.of(2019, Month.JULY, 8), LocalDate.of(2019, Month.JULY, 12), n2, "Nantes", "Lorient", Transport.AVION,
+                150,
                 col1);
-        m21.setStatut(StatutMission.VALIDEE);
-        this.missionRepo.saveAndFlush(m21);
+        m8.setStatut(StatutMission.VALIDEE);
+        this.missionRepo.saveAndFlush(m8);
+
+        Mission m9 = new Mission(LocalDate.of(2019, Month.AUGUST, 5), LocalDate.of(2019, Month.AUGUST, 8), n1, "Nantes", "Nancy",
+                Transport.COVOITURAGE,
+                250,
+                col1);
+        m9.setStatut(StatutMission.VALIDEE);
+        this.missionRepo.saveAndFlush(m9);
+
+        Mission m10 = new Mission(LocalDate.of(2018, Month.SEPTEMBER, 18), LocalDate.of(2018, Month.SEPTEMBER, 21), n2, "Nantes", "Lyon",
+                Transport.TRAIN, 225, col1);
+        m10.setStatut(StatutMission.VALIDEE);
+        this.missionRepo.saveAndFlush(m10);
+
+        Mission m11 = new Mission(LocalDate.of(2018, Month.MARCH, 12), LocalDate.of(2018, Month.MARCH, 14), n3, "Nantes", "Lyon",
+                Transport.TRAIN, 225, col1);
+        m11.setStatut(StatutMission.VALIDEE);
+        this.missionRepo.saveAndFlush(m11);
+
 
         NoteDeFrais noteDeFrais = new NoteDeFrais();
         noteDeFrais.setDate(LocalDate.of(2019, Month.AUGUST, 15));
@@ -182,12 +218,14 @@ public class StartupListener {
         this.ndfRepo.save(noteDeFrais2);
 
         NoteDeFraisCumul ndfCumul1 = new NoteDeFraisCumul();
-        ndfCumul1.setMission(m21);
+
+        ndfCumul1.setMission(m9);
+
         ndfCumul1.addNotesDeFrais(noteDeFrais);
         this.ndfCumulRepo.save(ndfCumul1);
 
         NoteDeFraisCumul ndfCumul2 = new NoteDeFraisCumul();
-        ndfCumul2.setMission(m1);
+        ndfCumul2.setMission(m10);
         ndfCumul2.addNotesDeFrais(noteDeFrais2);
         this.ndfCumulRepo.save(ndfCumul2);
 

@@ -99,4 +99,11 @@ public class MissionService {
         return this.missionRepo.save(mission);
     }
 
+    public List<Mission> getMissionsEchues(Long idCollegue) {
+        return this.missionRepo.findAll().stream()
+                .filter(mission -> mission.getCollegue().getId() == idCollegue && mission.getStatut().equals(StatutMission.VALIDEE)
+                        && mission.getEndDate().isBefore(LocalDate.now()))
+                .collect(Collectors.toList());
+    }
+
 }
