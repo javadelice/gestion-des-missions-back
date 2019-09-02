@@ -1,5 +1,6 @@
 package dev.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.domain.NoteDeFrais;
+import dev.domain.NoteDeFraisCumul;
 import dev.repository.NoteDeFraisRepo;
 import dev.service.NoteDeFraisCumulService;
 import dev.service.NoteDeFraisService;
@@ -56,7 +58,7 @@ public class NoteDeFraisController {
         // ndfService.findByNdfCumulId(ndfCumulService.findByMission(id).get().getId());
 
         if (ndfCumulService.findByMission(mission) == null) {
-            return null;
+            return new ArrayList<NoteDeFrais>();
         }
         return ndfService.findByNdfCumulId(ndfCumulService.findByMission(mission).getId());
     }
@@ -67,8 +69,9 @@ public class NoteDeFraisController {
      */
 
     @PostMapping(path = "/lignedefrais")
-    public NoteDeFrais CreerNdf(@RequestBody NoteDeFrais noteDeFrais) {
+    public NoteDeFrais creerNdf(@RequestBody NoteDeFrais noteDeFrais) {
 
+    	noteDeFrais.setNdfCumul(this.ndfCumulService.findByMission(noteDeFrais.getNdfCumul().getMission().getId()));
         return ndfRepo.save(noteDeFrais);
         // imp cas où paramètres incorrects
     }
@@ -89,5 +92,11 @@ public class NoteDeFraisController {
     public void deleteMission(@RequestParam Long id) {
         this.ndfRepo.deleteById(id);
     }
+    
+    @PostMapping(path = "/notedefrais")
+    public NoteDeFraisCumul createNdfCumul(@RequestBody NoteDeFraisCumul ndfCumul) {
+    	return this.ndfCumulService.createNdfCumul(ndfCumul);
+    }
+    
 
 }

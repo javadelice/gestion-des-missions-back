@@ -9,12 +9,16 @@ import org.springframework.stereotype.Service;
 
 import dev.domain.NoteDeFraisCumul;
 import dev.repository.NoteDeFraisCumulRepo;
+import dev.repository.NoteDeFraisRepo;
 
 @Service
 public class NoteDeFraisCumulService {
 
     @Autowired
-    NoteDeFraisCumulRepo noteDeFraisCumulRepo;
+    private NoteDeFraisCumulRepo noteDeFraisCumulRepo;
+    
+    @Autowired
+    private NoteDeFraisRepo ndfRepo;
 
     public Optional<NoteDeFraisCumul> findById(Long id) {
 
@@ -37,5 +41,16 @@ public class NoteDeFraisCumulService {
 //		return noteDeFraisCumulRepo.findByMission(this.missionRepo.findById(id).get());
 
     }
+    
+    public NoteDeFraisCumul createNdfCumul(NoteDeFraisCumul ndfCumul) {
+    	return this.noteDeFraisCumulRepo.save(ndfCumul);
+    }
+    
+//    public List<NoteDeFrais> createNdfList(List<NoteDeFrais> listeNdf) {
+//    	for (NoteDeFrais ndf : listeNdf) {
+//    		this.ndfRepo.save(ndf);
+//    	}
+//    	return listeNdf;
+//    }
 
 }

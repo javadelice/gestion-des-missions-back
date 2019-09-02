@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Mission {
 
@@ -47,6 +49,7 @@ public class Mission {
     @OneToOne
     @JoinColumn(name = "id_noteDeFraisCumul")
     @Transient
+    @JsonIgnore
     private NoteDeFraisCumul ndfCumul;
 
     public Mission() {
