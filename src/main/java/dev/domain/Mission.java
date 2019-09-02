@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Mission {
@@ -44,7 +47,9 @@ public class Mission {
     private Collegue collegue;
 
     @OneToOne
-	@JoinColumn(name = "id_noteDeFraisCumul")
+    @JoinColumn(name = "id_noteDeFraisCumul")
+    @Transient
+    @JsonIgnore
     private NoteDeFraisCumul ndfCumul;
 
     private Boolean primeACalculer;
@@ -64,7 +69,7 @@ public class Mission {
         this.transport = transport;
         this.prime = prime;
         this.collegue = collegue;
-        this.primeACalculer = nature.getHasPrime().equals(Choix.OUI) ;
+        this.primeACalculer = nature.getHasPrime().equals(Choix.OUI);
     }
 
     public Collegue getCollegue() {

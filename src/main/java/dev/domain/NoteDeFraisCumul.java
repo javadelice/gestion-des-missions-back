@@ -26,7 +26,6 @@ public class NoteDeFraisCumul {
 
     @OneToOne
     @JoinColumn(name = "mission_id")
-    @JsonIgnore
     private Mission mission;
 
     public NoteDeFraisCumul() {
