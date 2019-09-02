@@ -3,7 +3,6 @@ package dev.service;
 import dev.domain.*;
 import dev.repository.CollegueRepo;
 import dev.repository.MissionRepo;
-import dev.security.JWTAuthenticationSuccessHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.Period;
 import java.util.List;
 
 @Service

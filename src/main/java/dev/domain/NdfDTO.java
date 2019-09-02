@@ -2,43 +2,31 @@ package dev.domain;
 
 import java.time.LocalDate;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+public class NdfDTO {
 
-@Entity
-public class NoteDeFrais {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private LocalDate date;
 
-    @Enumerated(EnumType.STRING)
+
     private NdfNature nature;
 
     private Double montant;
 
-    @ManyToOne
-    @JoinColumn(name = "id_ndfCumul")
-    private NoteDeFraisCumul ndfCumul;
 
-    public NoteDeFrais() {
+    private Long idMission;
+
+    public NdfDTO() {
 
     }
 
-    public NoteDeFrais(LocalDate date, Double montant, NdfNature nature, NoteDeFraisCumul ndfCumul) {
+    public NdfDTO(LocalDate date, Double montant, NdfNature nature, Long idMission) {
         super();
 
         this.date = date;
         this.nature = nature;
         this.montant = montant;
-        this.ndfCumul = ndfCumul;
+        this.idMission = idMission;
     }
 
     public Long getId() {
@@ -73,15 +61,15 @@ public class NoteDeFrais {
         this.montant = montant;
     }
 
-    public NoteDeFraisCumul getNdfCumul() {
-        return ndfCumul;
+    public Long getIdMission() {
+        return idMission;
     }
 
-    public void setNdfCumul(NoteDeFraisCumul ndfCumul) {
-        this.ndfCumul = ndfCumul;
+    public void setIdMission(Long idMission) {
+        this.idMission = idMission;
     }
 
-//	public Collegue getCollegue() {
+    //	public Collegue getCollegue() {
 //		return collegue;
 //	}
 //

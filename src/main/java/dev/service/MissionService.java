@@ -52,6 +52,8 @@ public class MissionService {
                     "Date de fin de mission invalide (il est interdit de créer une mission qui se termine Samedi ou Dimanche).");
         }
 
+        
+    
         List<Mission> listeMissions = getMissions(mission.getCollegue().getId());
         for (Mission uneMission : listeMissions) {
             if (uneMission.getId() == mission.getId()) {

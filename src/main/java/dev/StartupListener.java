@@ -87,6 +87,14 @@ public class StartupListener {
         col2.setDepartement(Departement.D2);
         this.collegueRepo.save(col2);
 
+        Collegue col4 = new Collegue();
+        col4.setNom("User2");
+        col4.setPrenom("DEV");
+        col4.setEmail("user2@dev.fr");
+        col4.setMotDePasse(passwordEncoder.encode("superpass"));
+        col4.setRoles(Arrays.asList(new RoleCollegue(col2, Role.ROLE_UTILISATEUR)));
+        this.collegueRepo.save(col4);
+
         Collegue col3 = new Collegue();
         col3.setNom("Manager");
         col3.setPrenom("DEV");
@@ -122,6 +130,7 @@ public class StartupListener {
         n2.setFinValidite(null);
         this.natureRepo.save(n2);
 
+
         Nature n3 = new Nature();
         n3.setCode("Formation");
         n3.setIsFacturee(Choix.NON);
@@ -137,6 +146,7 @@ public class StartupListener {
 
         Mission m1 = new Mission(LocalDate.of(2019, Month.SEPTEMBER, 3), LocalDate.of(2019, Month.SEPTEMBER, 9), n1, "Nantes", "Lyon",
                 Transport.AVION, 100, col1);
+
         this.missionRepo.saveAndFlush(m1);
 
         Mission m2 = new Mission(LocalDate.of(2019, Month.SEPTEMBER, 3), LocalDate.of(2019, Month.SEPTEMBER, 12), n2, "Nantes", "Rennes",
@@ -173,6 +183,7 @@ public class StartupListener {
                 col3);
         m7.setStatut(StatutMission.EN_ATTENTE_VALIDATION);
         this.missionRepo.saveAndFlush(m7);
+
 
         Mission m8 = new Mission(LocalDate.of(2019, Month.JULY, 8), LocalDate.of(2019, Month.JULY, 12), n2, "Nantes", "Lorient", Transport.AVION,
                 150,
@@ -212,9 +223,10 @@ public class StartupListener {
         this.ndfRepo.save(noteDeFrais2);
 
         NoteDeFraisCumul ndfCumul1 = new NoteDeFraisCumul();
-        ndfCumul1.setMission(m9);
-        ndfCumul1.addNotesDeFrais(noteDeFrais);
 
+        ndfCumul1.setMission(m9);
+
+        ndfCumul1.addNotesDeFrais(noteDeFrais);
         this.ndfCumulRepo.save(ndfCumul1);
 
         NoteDeFraisCumul ndfCumul2 = new NoteDeFraisCumul();
@@ -228,18 +240,18 @@ public class StartupListener {
         this.ndfRepo.save(noteDeFrais);
         noteDeFrais2.setNdfCumul(ndfCumul1);
         this.ndfRepo.save(noteDeFrais2);
-        m3.setNdfCumul(ndfCumul1);
-        this.missionRepo.save(m3);
-        m1.setNdfCumul(ndfCumul2);
-        this.missionRepo.save(m1);
+//        m21.setNdfCumul(ndfCumul1);
+//        this.missionRepo.save(m21);
+//        m1.setNdfCumul(ndfCumul2);
+//        this.missionRepo.save(m1);
 
-        NoteDeFrais noteDeFrais3 = new NoteDeFrais(LocalDate.of(2018, Month.MARCH, 20), 25.20, NdfNature.HOTEL, ndfCumul2, col2);
+        NoteDeFrais noteDeFrais3 = new NoteDeFrais(LocalDate.of(2018, Month.MARCH, 20), 25.20, NdfNature.HOTEL, ndfCumul2);
         this.ndfRepo.save(noteDeFrais3);
 
-        NoteDeFrais noteDeFrais4 = new NoteDeFrais(LocalDate.of(2018, Month.JUNE, 25), 34.51, NdfNature.CARBURANT, ndfCumul1, col3);
+        NoteDeFrais noteDeFrais4 = new NoteDeFrais(LocalDate.of(2018, Month.JUNE, 25), 34.51, NdfNature.CARBURANT, ndfCumul1);
         this.ndfRepo.save(noteDeFrais4);
 
-        NoteDeFrais noteDeFrais5 = new NoteDeFrais(LocalDate.of(2018, Month.APRIL, 11), 34.51, NdfNature.CARBURANT, ndfCumul1, col3);
+        NoteDeFrais noteDeFrais5 = new NoteDeFrais(LocalDate.of(2018, Month.APRIL, 11), 34.51, NdfNature.CARBURANT, ndfCumul1);
         this.ndfRepo.save(noteDeFrais5);
 
     }
