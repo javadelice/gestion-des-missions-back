@@ -46,4 +46,9 @@ public class RestResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleConflict(NatureIntrouvableException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La nature à supprimer est introuvable");
     }
+
+    @ExceptionHandler(value = NoteDeFraisNonTrouveeException.class)
+    protected ResponseEntity<Object> handleConflict(NoteDeFraisNonTrouveeException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    }
 }
