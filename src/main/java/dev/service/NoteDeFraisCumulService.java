@@ -1,6 +1,5 @@
 package dev.service;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -8,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dev.domain.NoteDeFraisCumul;
+import dev.repository.MissionRepo;
 import dev.repository.NoteDeFraisCumulRepo;
 import dev.repository.NoteDeFraisRepo;
 
@@ -20,6 +20,9 @@ public class NoteDeFraisCumulService {
     @Autowired
     private NoteDeFraisRepo ndfRepo;
 
+    @Autowired
+    MissionRepo missionRepo;
+
     public Optional<NoteDeFraisCumul> findById(Long id) {
 
         return noteDeFraisCumulRepo.findById(id);
@@ -27,17 +30,24 @@ public class NoteDeFraisCumulService {
     }
 
     public NoteDeFraisCumul findByMission(Long idMission) {
+        NoteDeFraisCumul ndfCumul = new NoteDeFraisCumul();
+        try {
+            ndfCumul = this.noteDeFraisCumulRepo.findAll().stream()
+                    // .filter(ndf -> ndf.getMission().getId() == idMission ? Stream.of(ndf):
+                    // Stream.empty())
+                    .filter(ndf -> (ndf.getMission().getId() == idMission))
 
-        List<NoteDeFraisCumul> ndfCumul = this.noteDeFraisCumulRepo.findAll().stream()
-                .filter(ndf -> ndf.getMission().getId() == idMission)
-                .collect(Collectors.toList());
-
-        if (ndfCumul.isEmpty()) {
-            return null;
+                    .collect(Collectors.toList()).get(0);
+//		
+//		return noteDeFraisCumulRepo.findByMission(this.missionRepo.findById(id).get());
+        } catch (NullPointerException e) {
+            // Creation d'une note de frais
+            this.missionRepo.findById(idMission).get().setNdfCumul(new NoteDeFraisCumul());
+            // recurse on this method
+            this.findByMission(idMission);
+        } finally {
+            return ndfCumul;
         }
-
-        return ndfCumul.get(0);
-
     }
 
     public NoteDeFraisCumul createNdfCumul(NoteDeFraisCumul ndfCumul) {

@@ -82,6 +82,12 @@ public class NoteDeFraisController {
         }
         return ndfRepo.save(noteDeFrais);
         // imp cas où paramètres incorrects
+
+        /**
+         * La méthode creerNdf permet d'ajouter la note de frais donné en paramètre
+         * 
+         */
+
     }
 
     /**
@@ -91,8 +97,7 @@ public class NoteDeFraisController {
 
     @PatchMapping(path = "/lignedefrais")
     public NoteDeFrais patchNdf(@RequestBody NoteDeFrais noteDeFrais) {
-
-        return ndfRepo.save(noteDeFrais);
+        return ndfRepo.save(ndfService.verifyLigneDeFrais(noteDeFrais));
 
     }
 
