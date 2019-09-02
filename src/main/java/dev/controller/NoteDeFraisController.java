@@ -3,6 +3,7 @@ package dev.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import dev.domain.NdfDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -53,15 +54,15 @@ public class NoteDeFraisController {
      */
 
     @RequestMapping(method = RequestMethod.GET, path = "/notedefrais") // , params = "mission")
-    public List<NoteDeFrais> getNoteDeFraisFromMission(@RequestParam Long mission) {
+    public List<NoteDeFrais> getNoteDeFraisFromMission(@RequestParam Long idMission) {
 
         // return
         // ndfService.findByNdfCumulId(ndfCumulService.findByMission(id).get().getId());
 
-        if (ndfCumulService.findByMission(mission) == null) {
+        if (ndfCumulService.findByMission(idMission) == null) {
             return new ArrayList<NoteDeFrais>();
         }
-        return ndfService.findByNdfCumulId(ndfCumulService.findByMission(mission).getId());
+        return ndfService.findByNdfCumulId(ndfCumulService.findByMission(idMission).getId());
     }
 
     /**
@@ -70,18 +71,21 @@ public class NoteDeFraisController {
      */
 
     @PostMapping(path = "/lignedefrais")
-    public NoteDeFrais creerNdf(@RequestBody NoteDeFrais noteDeFrais) {
+    public NoteDeFrais creerNdf(@RequestBody NdfDTO noteDeFraisDTO) {
 
-        noteDeFrais.setNdfCumul(this.ndfCumulService.findByMission(noteDeFrais.getNdfCumul().getMission().getId()));
-        if (noteDeFrais.getDate().isBefore(noteDeFrais.getNdfCumul().getMission().getStartDate())
-                && noteDeFrais.getDate().isAfter(noteDeFrais.getNdfCumul().getMission().getEndDate())) {
+        NoteDeFraisCumul noteDeFraisCumul = this.ndfCumulService.findByMission(noteDeFraisDTO.getIdMission());
+        if (noteDeFraisDTO.getDate().isBefore(noteDeFraisCumul.getMission().getStartDate())
+                || noteDeFraisDTO.getDate().isAfter(noteDeFraisCumul.getMission().getEndDate())) {
             throw new LigneDeFraisInvalideException("Ligne de frais invalide ! La date doit être comprise dans les dates de la mission.");
         }
-        if (noteDeFrais.getMontant() <= 0) {
+        if (noteDeFraisDTO.getMontant() <= 0) {
             throw new LigneDeFraisInvalideException("Ligne de frais invalide ! Le montant doit être supérieur à 0");
         }
-        return ndfRepo.save(noteDeFrais);
-        // imp cas où paramètres incorrects
+
+        NoteDeFrais noteDeFrais = new NoteDeFrais(noteDeFraisDTO.getDate(), noteDeFraisDTO.getMontant(), noteDeFraisDTO.getNature(), noteDeFraisCumul);
+        ndfRepo.save(noteDeFrais);
+
+        return noteDeFrais;
 
         /**
          * La méthode creerNdf permet d'ajouter la note de frais donné en paramètre

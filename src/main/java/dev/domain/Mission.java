@@ -2,16 +2,7 @@ package dev.domain;
 
 import java.time.LocalDate;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -46,9 +37,8 @@ public class Mission {
     @JoinColumn(name = "id_collegue")
     private Collegue collegue;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_noteDeFraisCumul")
-    @Transient
     @JsonIgnore
     private NoteDeFraisCumul ndfCumul;
 

@@ -1,8 +1,11 @@
 package dev.service;
 
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import dev.domain.Mission;
+import dev.exception.MissionNonTrouveException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,24 +33,15 @@ public class NoteDeFraisCumulService {
     }
 
     public NoteDeFraisCumul findByMission(Long idMission) {
-        NoteDeFraisCumul ndfCumul = new NoteDeFraisCumul();
-        try {
-            ndfCumul = this.noteDeFraisCumulRepo.findAll().stream()
-                    // .filter(ndf -> ndf.getMission().getId() == idMission ? Stream.of(ndf):
-                    // Stream.empty())
-                    .filter(ndf -> (ndf.getMission().getId() == idMission))
+        Mission mission = missionRepo.findById(idMission)
+                .orElseThrow(() -> new MissionNonTrouveException("Mission introuvable"));
 
-                    .collect(Collectors.toList()).get(0);
-//		
-//		return noteDeFraisCumulRepo.findByMission(this.missionRepo.findById(id).get());
-        } catch (NullPointerException e) {
-            // Creation d'une note de frais
-            this.missionRepo.findById(idMission).get().setNdfCumul(new NoteDeFraisCumul());
-            // recurse on this method
-            this.findByMission(idMission);
-        } finally {
-            return ndfCumul;
+        if(mission.getNdfCumul() == null) {
+            mission.setNdfCumul(new NoteDeFraisCumul(new ArrayList<>(), mission));
         }
+        noteDeFraisCumulRepo.save(mission.getNdfCumul());
+        missionRepo.save(mission);
+        return mission.getNdfCumul();
     }
 
     public NoteDeFraisCumul createNdfCumul(NoteDeFraisCumul ndfCumul) {
