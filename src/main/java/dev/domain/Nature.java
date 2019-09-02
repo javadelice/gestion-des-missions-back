@@ -35,6 +35,7 @@ public class Nature {
 
     private LocalDate finValidite;
 
+
     @OneToMany(mappedBy = "nature", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Mission> listeMissions;

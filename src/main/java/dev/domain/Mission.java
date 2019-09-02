@@ -44,8 +44,10 @@ public class Mission {
     private Collegue collegue;
 
     @OneToOne
-    @JoinColumn(name = "id_noteDeFraisCumul")
+	@JoinColumn(name = "id_noteDeFraisCumul")
     private NoteDeFraisCumul ndfCumul;
+
+    private Boolean primeACalculer;
 
     public Mission() {
         this.statut = StatutMission.INITIALE;
@@ -62,6 +64,7 @@ public class Mission {
         this.transport = transport;
         this.prime = prime;
         this.collegue = collegue;
+        this.primeACalculer = nature.getHasPrime().equals(Choix.OUI) ;
     }
 
     public Collegue getCollegue() {
@@ -144,29 +147,35 @@ public class Mission {
         this.prime = prime;
     }
 
+    public Boolean getPrimeACalculer() {
+        return primeACalculer;
+    }
+
+    public void setPrimeACalculer(Boolean primeACalculer) {
+        this.primeACalculer = primeACalculer;
+    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append("Mission [id=");
-        builder.append(id);
-        builder.append(", startDate=");
+        builder.append("startDate=");
         builder.append(startDate);
         builder.append(", endDate=");
         builder.append(endDate);
         builder.append(", nature=");
-        builder.append(nature);
+        builder.append(nature.getCode());
         builder.append(", villeDepart=");
         builder.append(villeDepart);
         builder.append(", villeArrivee=");
         builder.append(villeArrivee);
         builder.append(", transport=");
-        builder.append(transport);
+        builder.append(transport.name());
         builder.append(", statut=");
         builder.append(statut);
         builder.append(", prime=");
         builder.append(prime);
         builder.append(", collegue=");
-        builder.append(collegue);
+        builder.append(collegue.getEmail());
         builder.append("]");
         return builder.toString();
     }
