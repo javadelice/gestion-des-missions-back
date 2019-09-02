@@ -16,7 +16,7 @@ public class NoteDeFraisCumulService {
 
     @Autowired
     private NoteDeFraisCumulRepo noteDeFraisCumulRepo;
-    
+
     @Autowired
     private NoteDeFraisRepo ndfRepo;
 
@@ -37,20 +37,11 @@ public class NoteDeFraisCumulService {
         }
 
         return ndfCumul.get(0);
-//		
-//		return noteDeFraisCumulRepo.findByMission(this.missionRepo.findById(id).get());
 
     }
-    
+
     public NoteDeFraisCumul createNdfCumul(NoteDeFraisCumul ndfCumul) {
-    	return this.noteDeFraisCumulRepo.save(ndfCumul);
+        return this.noteDeFraisCumulRepo.save(ndfCumul);
     }
-    
-//    public List<NoteDeFrais> createNdfList(List<NoteDeFrais> listeNdf) {
-//    	for (NoteDeFrais ndf : listeNdf) {
-//    		this.ndfRepo.save(ndf);
-//    	}
-//    	return listeNdf;
-//    }
 
 }

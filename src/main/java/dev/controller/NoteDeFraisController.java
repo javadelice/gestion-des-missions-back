@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import dev.domain.NoteDeFrais;
 import dev.domain.NoteDeFraisCumul;
+import dev.exception.LigneDeFraisInvalideException;
 import dev.repository.NoteDeFraisRepo;
 import dev.service.NoteDeFraisCumulService;
 import dev.service.NoteDeFraisService;
@@ -71,7 +72,14 @@ public class NoteDeFraisController {
     @PostMapping(path = "/lignedefrais")
     public NoteDeFrais creerNdf(@RequestBody NoteDeFrais noteDeFrais) {
 
-    	noteDeFrais.setNdfCumul(this.ndfCumulService.findByMission(noteDeFrais.getNdfCumul().getMission().getId()));
+        noteDeFrais.setNdfCumul(this.ndfCumulService.findByMission(noteDeFrais.getNdfCumul().getMission().getId()));
+        if (noteDeFrais.getDate().isBefore(noteDeFrais.getNdfCumul().getMission().getStartDate())
+                && noteDeFrais.getDate().isAfter(noteDeFrais.getNdfCumul().getMission().getEndDate())) {
+            throw new LigneDeFraisInvalideException("Ligne de frais invalide ! La date doit être comprise dans les dates de la mission.");
+        }
+        if (noteDeFrais.getMontant() <= 0) {
+            throw new LigneDeFraisInvalideException("Ligne de frais invalide ! Le montant doit être supérieur à 0");
+        }
         return ndfRepo.save(noteDeFrais);
         // imp cas où paramètres incorrects
     }
@@ -92,11 +100,10 @@ public class NoteDeFraisController {
     public void deleteMission(@RequestParam Long id) {
         this.ndfRepo.deleteById(id);
     }
-    
+
     @PostMapping(path = "/notedefrais")
     public NoteDeFraisCumul createNdfCumul(@RequestBody NoteDeFraisCumul ndfCumul) {
-    	return this.ndfCumulService.createNdfCumul(ndfCumul);
+        return this.ndfCumulService.createNdfCumul(ndfCumul);
     }
-    
 
 }
