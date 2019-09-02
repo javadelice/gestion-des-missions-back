@@ -104,6 +104,8 @@ public class StartupListener {
         col3.setDepartement(Departement.D2);
         this.collegueRepo.save(col3);
 
+        // Création de 3 natures de mission différentes
+
         Nature n1 = new Nature();
         n1.setCode("Conseil");
         n1.setIsFacturee(Choix.OUI);
@@ -138,6 +140,8 @@ public class StartupListener {
         n3.setDebutValidite(LocalDate.of(2018, Month.JULY, 28));
         n3.setFinValidite(null);
         this.natureRepo.save(n3);
+
+        // Création d'un jeu de missions
 
         Mission m1 = new Mission(LocalDate.of(2019, Month.SEPTEMBER, 3), LocalDate.of(2019, Month.SEPTEMBER, 9), n1, "Nantes", "Lyon",
                 Transport.AVION, 100, col1);
@@ -201,6 +205,8 @@ public class StartupListener {
                 Transport.TRAIN, 0, col1);
         m11.setStatut(StatutMission.VALIDEE);
         this.missionRepo.saveAndFlush(m11);
+
+        // Création d'un jeu de notes de frais
 
         NoteDeFrais noteDeFrais = new NoteDeFrais();
         noteDeFrais.setDate(LocalDate.of(2019, Month.AUGUST, 15));
