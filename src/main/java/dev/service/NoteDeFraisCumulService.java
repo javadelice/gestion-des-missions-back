@@ -2,14 +2,13 @@ package dev.service;
 
 import java.util.ArrayList;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
-import dev.domain.Mission;
-import dev.exception.MissionNonTrouveException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import dev.domain.Mission;
 import dev.domain.NoteDeFraisCumul;
+import dev.exception.MissionNonTrouveException;
 import dev.repository.MissionRepo;
 import dev.repository.NoteDeFraisCumulRepo;
 import dev.repository.NoteDeFraisRepo;
@@ -36,7 +35,7 @@ public class NoteDeFraisCumulService {
         Mission mission = missionRepo.findById(idMission)
                 .orElseThrow(() -> new MissionNonTrouveException("Mission introuvable"));
 
-        if(mission.getNdfCumul() == null) {
+        if (mission.getNdfCumul() == null) {
             mission.setNdfCumul(new NoteDeFraisCumul(new ArrayList<>(), mission));
         }
         noteDeFraisCumulRepo.save(mission.getNdfCumul());

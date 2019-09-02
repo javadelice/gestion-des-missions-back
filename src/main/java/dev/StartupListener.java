@@ -128,7 +128,6 @@ public class StartupListener {
         n2.setFinValidite(null);
         this.natureRepo.save(n2);
 
-
         Nature n3 = new Nature();
         n3.setCode("Formation");
         n3.setIsFacturee(Choix.NON);
@@ -180,7 +179,6 @@ public class StartupListener {
         m7.setStatut(StatutMission.EN_ATTENTE_VALIDATION);
         this.missionRepo.saveAndFlush(m7);
 
-
         Mission m8 = new Mission(LocalDate.of(2019, Month.JULY, 8), LocalDate.of(2019, Month.JULY, 12), n2, "Nantes", "Lorient", Transport.AVION,
                 150,
                 col1);
@@ -200,10 +198,9 @@ public class StartupListener {
         this.missionRepo.saveAndFlush(m10);
 
         Mission m11 = new Mission(LocalDate.of(2018, Month.MARCH, 12), LocalDate.of(2018, Month.MARCH, 14), n3, "Nantes", "Lyon",
-                Transport.TRAIN, 225, col1);
+                Transport.TRAIN, 0, col1);
         m11.setStatut(StatutMission.VALIDEE);
         this.missionRepo.saveAndFlush(m11);
-
 
         NoteDeFrais noteDeFrais = new NoteDeFrais();
         noteDeFrais.setDate(LocalDate.of(2019, Month.AUGUST, 15));
