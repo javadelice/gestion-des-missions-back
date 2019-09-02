@@ -12,6 +12,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
@@ -70,10 +71,19 @@ public class TraitementDeNuitService {
                                         mission.getNdfCumul().getNotesDeFrais().stream().mapToDouble(noteDeFrais -> noteDeFrais.getMontant()).sum()
                     : 0 : 0;
 
-            double depassement = fraisTotaux - Period.between(mission.getStartDate(), mission.getEndDate()).getDays() * mission.getNature().getPlafondFrais();
+            int nbJours = 0;
+            LocalDate start = mission.getStartDate();
+            while (!start.isAfter(mission.getEndDate())) {
+                if(start.getDayOfWeek() != DayOfWeek.SATURDAY && start.getDayOfWeek() != DayOfWeek.SUNDAY) {
+                    nbJours ++;
+                }
+                start = start.plusDays(1);
+            }
+
+            double depassement = fraisTotaux - nbJours * mission.getNature().getPlafondFrais();
             depassement = depassement > 0 ? depassement : 0;
             mission.setPrime(
-                    (int) Math.ceil(Period.between(mission.getStartDate(), mission.getEndDate()).getDays()
+                    (int) Math.ceil(nbJours
                             * mission.getNature().getTjm()
                             * mission.getNature().getPourcentagePrime()/100
                             - depassement
