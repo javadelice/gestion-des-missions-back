@@ -87,8 +87,10 @@ public class NoteDeFraisService {
             throw new LigneDeFraisInvalideException("La date doit être comprise dans la période de la mission");
         }
 
+        //Récupération de la note de frais liée à la ligne de frais
         NoteDeFraisCumul noteDeFraisCumul = noteDeFraisCumulRepo.findById(ldf.getNdfCumul().getId()).get();
 
+        //Vérification de l'unicité de la ligne de frais.
         if (noteDeFraisCumul.getNotesDeFrais().stream().anyMatch(noteDeFraisATester ->
                 noteDeFraisATester.getDate().equals(ldf.getDate())
                 && noteDeFraisATester.getNature() == ldf.getNature())) {

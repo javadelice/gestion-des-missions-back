@@ -53,7 +53,7 @@ public class NoteDeFraisController {
     }
 
     /**
-     * La méthode getNoteDeFrais permet d'obtenir la liste des notes de frais en
+     * La méthode getNoteDeFrais permet d'obtenir la liste des  frais en
      * relation avec la mission donnée en paramètre
      * 
      */

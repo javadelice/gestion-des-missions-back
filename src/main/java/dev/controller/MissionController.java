@@ -3,6 +3,7 @@ package dev.controller;
 import java.util.List;
 import java.util.Optional;
 
+import dev.exception.MissionNonTrouveException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -94,4 +95,18 @@ public class MissionController {
         return this.missionService.getMissionsEchues(idCollegue);
     }
 
+
+    @RequestMapping(method = RequestMethod.GET, path = "/mission")
+    public Optional<Mission> checkAllowance(@RequestParam Long idMission, @RequestParam Long idCollegue) {
+        Optional<Mission> optMission = this.missionRepo.findById(idMission);
+        if(optMission.isPresent()){
+            if(optMission.get().getCollegue().getId() == idCollegue){
+                return optMission;
+            }else {
+                throw new MissionNonTrouveException("Utilisateur non autorise");
+            }
+        }
+
+        return optMission;
+    }
 }
